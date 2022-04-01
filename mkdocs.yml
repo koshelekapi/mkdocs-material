@@ -50,7 +50,7 @@ plugins:
       output_folder: 'out'
       input_folder: 'src'
       input_extensions: 'puml' # comma separated list of extensions to parse, by default every file is parsed
-  - plantuml-markdown:
+  - plantuml_markdown:
         server: http://www.plantuml.com/plantuml  # PlantUML server, for remote rendering other global options
         cachedir: /tmp                            # set a non-empty value to enable caching
         base_dir: .                               # where to search for diagrams to include
