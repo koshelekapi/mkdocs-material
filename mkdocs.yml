@@ -30,7 +30,7 @@ nav:
   - Плагины: plugins.md
   - Процесс ревью: review.md
 extra:
-  homepage: https://andwr.github.io/mkdocs-material/
+  homepage: https://koshelekapi.github.io/mkdocs-material/
   alternate:
     - name: English
     - link: /en/
