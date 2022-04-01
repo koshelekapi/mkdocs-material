@@ -1,0 +1,40 @@
+site_name: Developers
+theme:
+  name: material
+  language: ru
+  logo: assets/koshelek.svg
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: pink
+      toggle:
+          icon: material/toggle-switch
+          name: Switch to light mode
+nav:
+  - MkDocs Material: index.md
+  - PlantUML: plantuml.md
+  - OpenAPI: openapi.md
+  - Версионирование: versioning.md
+  - Локализация: localization.md
+  - Разметка: markdown.md
+  - Поиск: search.md
+  - Обратная связь: feedback.md
+  - Аналитика: analytics.md
+  - Кастомизация: customization.md
+  - Плагины: plugins.md
+  - Процесс ревью: review.md
+extra:
+  homepage: https://andwr.github.io/mkdocs-material/
+  alternate:
+    - name: English
+    - link: /en/
+    - lang: en
+    - name: Русский
+    - link: /ru/
+    - lang: ru
