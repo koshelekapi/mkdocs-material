@@ -1,8 +1,8 @@
-site_name: Developers
+site_name: Кошелёк | Разработчикам
 theme:
   name: material
   language: ru
-  logo: assets/koshelek.svg
+  logo: assets/koshelek.png
   palette:
     - scheme: default
       primary: indigo
