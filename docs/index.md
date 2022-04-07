@@ -10,14 +10,26 @@ MkDocs — это генератор статических сайтов на б
 
 Документация: https://www.mkdocs.org
 
-## Commands
+## Примеры документации
 
 * `mkdocs new [dir-name]` - Create a new project.
 * `mkdocs serve` - Start the live-reloading docs server.
 * `mkdocs build` - Build the documentation site.
 * `mkdocs -h` - Print help message and exit.
 
-## Project layout
+## Репозитории
+
+Upstream:
+
+* https://github.com/koshelekapi/mkdocs-material
+* https://koshelekapi.github.io/mkdocs-material
+
+Origin:
+
+* https://github.com/andwr/mkdocs-material
+* https://andwr.github.io/mkdocs-material
+
+## Структура проекта
 
     mkdocs.yml    # The configuration file.
     docs/
