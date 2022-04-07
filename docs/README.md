@@ -11,4 +11,3 @@ https://squidfunk.github.io/mkdocs-material/
 https://squidfunk.github.io/mkdocs-material/getting-started/
 
 https://squidfunk.github.io/mkdocs-material/reference/
-

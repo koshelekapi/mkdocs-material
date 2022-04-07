@@ -1,2 +1,13 @@
 # mkdocs-material
-Проект для исследования движка MkDocs Material
+
+Проект для исследования генератора статических сайтов MkDocs Material.
+
+Официальный сайт:
+
+https://squidfunk.github.io/mkdocs-material/
+
+Документация:
+
+https://squidfunk.github.io/mkdocs-material/getting-started/
+
+https://squidfunk.github.io/mkdocs-material/reference/

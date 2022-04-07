@@ -1,6 +1,14 @@
-# Welcome to MkDocs
+# MkDocs
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+MkDocs — это генератор статических сайтов на базе [Python](https://www.python.org/)
+
+- [x] Поддержка GitHub / GitLab Pages
+- [x] Кастомизация CSS, темы
+- [x] Отключаемая заглавная страница
+- [x] Плагины
+- [ ] Не поддерживается рендеринг спецификаций OpenAPI
+
+Документация: https://www.mkdocs.org
 
 ## Commands
 
