@@ -53,6 +53,7 @@ plugins:
   - i18n:
       default_language: !ENV [DEFAULT_LANGUAGE, "ru"]
       default_language_only: !ENV [DEFAULT_LANGUAGE_ONLY, false]
+      alternate_files_extension: json, txt, jpeg, yaml
       languages:
         ru:
           name: Русский
@@ -65,7 +66,6 @@ plugins:
       nav_translations:
         en:
           О проекте: About
-          OpenAPI: OpenAPI
           Версионирование: Versioning
           Локализация: Localization
           Разметка: Markdown
