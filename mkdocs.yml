@@ -20,18 +20,18 @@ theme:
           icon: material/toggle-switch
           name: Switch to light mode
 nav:
-  - О проекте: index.md
-  - PlantUML: plantuml.md
+  - О проекте: ru-ru/index.md
+  - PlantUML: ru-ru/plantuml.md
   - OpenAPI: openapi/openapi.md
-  - Версионирование: versioning.md
-  - Локализация: localization.md
-  - Разметка: markdown.md
-  - Поиск: search.md
-  - Обратная связь: feedback.md
-  - Аналитика: analytics.md
-  - Кастомизация: customization.md
-  - Плагины: plugins.md
-  - Процесс ревью: review.md
+  - Версионирование: ru-ru/versioning.md
+  - Локализация: ru-ru/localization.md
+  - Разметка: ru-ru/markdown.md
+  - Поиск: ru-ru/search.md
+  - Обратная связь: ru-ru/feedback.md
+  - Аналитика: ru-ru/analytics.md
+  - Кастомизация: ru-ru/customization.md
+  - Плагины: ru-ru/plugins.md
+  - Процесс ревью: ru-ru/review.md
 extra:
   homepage: https://koshelekapi.github.io/mkdocs-material/
   alternate:
