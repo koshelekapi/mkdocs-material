@@ -1,14 +1,5 @@
 # OpenAPI
 
---8<-- "References/abbreviations.md"
-
-<style>
-  .md-typeset h1,
-  .md-content__button {
-    display: none;
-  }
-</style>
-
 ## mkdocs-render-swagger-plugin
 
 > Источник: [https://pypi.org/project/mkdocs-render-swagger-plugin/](https://pypi.org/project/mkdocs-render-swagger-plugin/)
