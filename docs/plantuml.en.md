@@ -2,4 +2,4 @@
 
 EN
 
-![file](diagrams/out/pay-api-payment01.en.png)
+![file](en/diagrams/out/pay-api-payment01.en.png)
