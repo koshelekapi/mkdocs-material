@@ -4,4 +4,4 @@
 
 > Источник: https://pypi.org/project/mkdocs-render-swagger-plugin/
 
-!!swagger <pay-api.json>!!
+!!swagger pay-api.json!!
