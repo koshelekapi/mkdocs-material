@@ -12,10 +12,10 @@ MkDocs — это генератор статических сайтов на б
 
 ## Примеры документации
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+* Arduino — [Arduino CLI](https://arduino.github.io/arduino-cli/0.21/)
+* CentOS — [CentOS Infra Docs](https://docs.infra.centos.org/)
+* Intel - [Open Active Management Technology Cloud Toolkit](https://open-amt-cloud-toolkit.github.io/docs/2.2/)
+* Bloomberg - [Selekt](https://bloomberg.github.io/selekt/).
 
 ## Репозитории
 
