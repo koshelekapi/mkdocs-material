@@ -1,6 +1,9 @@
 # MkDocs
 
-MkDocs — это генератор статических сайтов на базе [Python](https://www.python.org/)
+MkDocs — это генератор статических сайтов на базе [Python](https://www.python.org/). Проект существует с 2014 г.
+
+MkDocs Material — начинаясь как тема оформления для MkDocs, постепенно развился в отдельный проект, родственный базовому MkDocs.
+
 
 - [x] Поддержка GitHub / GitLab Pages
 - [x] Кастомизация CSS, темы
@@ -8,7 +11,9 @@ MkDocs — это генератор статических сайтов на б
 - [x] Плагины
 - [ ] Не поддерживается рендеринг спецификаций OpenAPI
 
-Документация: https://www.mkdocs.org
+Документация MkDocs: [https://www.mkdocs.org](https://www.mkdocs.org)
+
+Документация MkDocs Material: [https://squidfunk.github.io/mkdocs-material/](https://squidfunk.github.io/mkdocs-material/)
 
 ## Примеры документации
 
@@ -31,7 +36,7 @@ Origin:
 
 ## Структура проекта
 
-    mkdocs.yml    # Файл конфигурации.
+    mkdocs.yml    # Файл конфигурации
     docs/
-        index.md  # Домашняя страница.
-        ...       # Другие страницы в разметке MD.
+        index.md  # Домашняя страница
+        ...       # Другие страницы в разметке MD
