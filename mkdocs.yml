@@ -20,7 +20,7 @@ theme:
 nav:
   - О проекте: index.md
   - PlantUML: plantuml.md
-  - OpenAPI: openapi/openapi.md
+  - OpenAPI: openapi.md
   - Версионирование: versioning.md
   - Локализация: localization.md
   - Разметка: markdown.md
