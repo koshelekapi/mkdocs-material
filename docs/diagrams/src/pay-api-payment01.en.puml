@@ -1,4 +1,4 @@
-@startuml pay-api-payment01-ru
+@startuml pay-api-payment01
 
 autonumber "<font color=red><b>[00]"
 actor Пользователь as User
