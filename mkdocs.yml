@@ -46,6 +46,7 @@ markdown_extensions:
       alternate_style: true
 plugins:
   - search
+  - render_swagger
   - build_plantuml:
       render: 'server' # or "local" for local rendering
       bin_path: '/usr/local/bin/plantuml' # ignored when render: server
@@ -56,7 +57,6 @@ plugins:
       output_folder: 'out'
       input_folder: 'src'
       input_extensions: 'puml' # comma separated list of extensions to parse, by default every file is parsed
-  - render_swagger
   - i18n:
       default_language: !ENV [DEFAULT_LANGUAGE, "ru"]
       default_language_only: !ENV [DEFAULT_LANGUAGE_ONLY, false]
