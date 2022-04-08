@@ -38,10 +38,10 @@ _italic_
 2. Two
 3. Three
 
-* bullet level 1
-   * bullet level 2
-      * bullet level 3
-         * bullet level 4
+* list item level 1
+   * list item level 2
+      * list item level 3
+         * list item level 4
             * etc
 
 
@@ -73,20 +73,6 @@ force the content to wrap and span multiple lines.
   }
 }
 ```
-
-=== "Tab 1"
-    Markdown **content**.
-
-    Multiple paragraphs.
-
-=== "Tab 2"
-    More Markdown **content**.
-
-    - list item a
-    - list item b
-
-
----
 
 === "Tab-01"
     !> **Important** notice with `inline code` and additional placeholder text used
