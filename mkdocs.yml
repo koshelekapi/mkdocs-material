@@ -32,13 +32,13 @@ nav:
   - Процесс ревью: review.md
 extra:
   homepage: https://koshelekapi.github.io/mkdocs-material/
-  alternate:
-    - name: English
-    - link: /en/
-    - lang: en
-    - name: Русский
-    - link: /ru/
-    - lang: ru
+#  alternate:
+#    - name: English
+#    - link: /en/
+#    - lang: en
+#    - name: Русский
+#    - link: /ru/
+#    - lang: ru
 markdown_extensions:
   - pymdownx.tasklist: # https://squidfunk.github.io/mkdocs-material/reference/lists/
       custom_checkbox: false
@@ -64,15 +64,15 @@ plugins:
         default:
           name: Default (ru)
           build: true
-        en:
+        ru:
           name: Русский
           build: true
           site_name: "MkDocs Material (Русскоязычная версия)"
-        fr:
+        en:
           name: English
           build: true
           site_name: "MkDocs Material (English Version)"
-      nav_translations:
-        fr:
-          Topic1: Sujet1
-          Topic2: Sujet2
+#      nav_translations:
+#        fr:
+#          Topic1: Sujet1
+#          Topic2: Sujet2
