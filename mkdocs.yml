@@ -2,6 +2,9 @@ site_name: MkDocs Material
 theme:
   name: material
   language: ru
+  features:
+    - navigation.tabs
+    - navigation.sections
   palette:
     - scheme: default
       primary: indigo
