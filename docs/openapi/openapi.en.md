@@ -2,4 +2,4 @@
 
 EN
 
-!!swagger pay-api.en.yaml!!
+!!swagger pay-api.yaml!!
