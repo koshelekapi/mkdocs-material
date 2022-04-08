@@ -43,8 +43,6 @@ extra:
     - lang: ru
 markdown_extensions:
   - admonition
-  - pymdownx.details
-  - pymdownx.superfences
   - pymdownx.tasklist: # https://squidfunk.github.io/mkdocs-material/reference/lists/
       custom_checkbox: false
   - pymdownx.tabbed: # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#tabbed
