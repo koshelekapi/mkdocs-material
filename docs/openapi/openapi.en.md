@@ -2,4 +2,4 @@
 
 EN
 
-!!swagger pay-api.en.yaml!!
+!!swagger openapi/pay-api.en.yaml!!
