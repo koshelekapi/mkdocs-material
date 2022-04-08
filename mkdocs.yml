@@ -1,8 +1,7 @@
-site_name: Кошелёк | Разработчикам
+site_name: Project name
 theme:
   name: material
   language: ru
-  logo: assets/koshelek.png
   palette:
     - scheme: default
       primary: indigo
@@ -39,7 +38,7 @@ extra:
     - link: /ru/
     - lang: ru
 markdown_extensions:
-  - pymdownx.tasklist:
+  - pymdownx.tasklist: # https://squidfunk.github.io/mkdocs-material/reference/lists/
       custom_checkbox: false
 plugins:
   - search
