@@ -74,6 +74,17 @@ force the content to wrap and span multiple lines.
 }
 ```
 
+=== "Tab 1"
+    Markdown **content**.
+
+    Multiple paragraphs.
+
+=== "Tab 2"
+    More Markdown **content**.
+
+    - list item a
+    - list item b
+
 
 === "Tab-01"
 !> **Important** notice with `inline code` and additional placeholder text used
