@@ -3,7 +3,6 @@ theme:
   name: material
   language: ru
   features:
-    - navigation.tabs
     - navigation.sections
   palette:
     - scheme: default
