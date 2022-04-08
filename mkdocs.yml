@@ -19,6 +19,7 @@ nav:
   - MkDocs Material: index.md
   - PlantUML: plantuml.md
   - OpenAPI: openapi.md
+  - OpenAPI в папке: openapi/openapi.md
   - Версионирование: versioning.md
   - Локализация: localization.md
   - Разметка: markdown.md

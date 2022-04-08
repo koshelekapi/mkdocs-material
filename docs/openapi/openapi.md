@@ -1,5 +1,3 @@
-# OpenAPI HTTP
-
 # OpenAPI
 
 ## mkdocs-render-swagger-plugin
