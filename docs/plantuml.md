@@ -13,4 +13,4 @@
 ```
 Пример:
 
-![file](diagrams/out/pay-api-payment01.png)
+![file](diagrams/out/pay-api-payment01-ru.png)
