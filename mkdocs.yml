@@ -1,8 +1,9 @@
-site_name: Кошелёк | Разработчикам
+site_name: MkDocs Material
 theme:
   name: material
   language: ru
-  logo: assets/koshelek.png
+  features:
+    - navigation.sections
   palette:
     - scheme: default
       primary: indigo
@@ -17,9 +18,9 @@ theme:
           icon: material/toggle-switch
           name: Switch to light mode
 nav:
-  - MkDocs Material: index.md
+  - О проекте: index.md
   - PlantUML: plantuml.md
-  - OpenAPI: openapi.md
+  - OpenAPI: openapi/openapi.md
   - Версионирование: versioning.md
   - Локализация: localization.md
   - Разметка: markdown.md
@@ -31,13 +32,18 @@ nav:
   - Процесс ревью: review.md
 extra:
   homepage: https://koshelekapi.github.io/mkdocs-material/
-  alternate:
-    - name: English
-    - link: /en/
-    - lang: en
-    - name: Русский
-    - link: /ru/
-    - lang: ru
+#  alternate:
+#    - name: English
+#    - link: /en/
+#    - lang: en
+#    - name: Русский
+#    - link: /ru/
+#    - lang: ru
+markdown_extensions:
+  - pymdownx.tasklist: # https://squidfunk.github.io/mkdocs-material/reference/lists/
+      custom_checkbox: false
+  - pymdownx.tabbed: # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#tabbed
+      alternate_style: true
 plugins:
   - search
   - build_plantuml:
@@ -50,3 +56,28 @@ plugins:
       output_folder: 'out'
       input_folder: 'src'
       input_extensions: 'puml' # comma separated list of extensions to parse, by default every file is parsed
+  - render_swagger
+  - i18n:
+      default_language: !ENV [DEFAULT_LANGUAGE, "ru"]
+      default_language_only: !ENV [DEFAULT_LANGUAGE_ONLY, false]
+      languages:
+        ru:
+          name: Русский
+          build: true
+          site_name: "MkDocs Material"
+        en:
+          name: English
+          build: true
+          site_name: "MkDocs Material (EN)"
+      nav_translations:
+        en:
+          О проекте: About
+          Версионирование: Versioning
+          Локализация: Localization
+          Разметка: Markdown
+          Поиск: Search
+          Обратная связь: Feedback
+          Аналитика: Analytics
+          Кастомизация: Customization
+          Плагины: Plugins
+          Процесс ревью: Process
