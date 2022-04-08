@@ -74,14 +74,13 @@ force the content to wrap and span multiple lines.
 }
 ```
 
-<!-- tabs:start -->
 
-=== **Tab-01**
+=== "Tab-01"
 
 !> **Important** notice with `inline code` and additional placeholder text used
 to force the content to wrap and span multiple lines.
 
-=== **Tab-02**
+=== "Tab-02"
 
 ```
 notice with `inline code` and additional placeholder text used
@@ -95,7 +94,6 @@ to force the content to wrap and span multiple lines.
 | padding-top | `Number` |`N`| `240` | padding top from screen |
 | custom-set | `Object` |`N`| `{}` |custom config [type.js](https://github.com/apache/incubator-weex-ui/blob/master/packages/wxc-result/type.js)|
 | wrap-style | `Object` | `N`|`{}` | custom wrap style|
-<!-- tabs:end -->
 
 ![jpg](assets/jpg.jpg)
 
