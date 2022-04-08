@@ -1,0 +1,1473 @@
+openapi: 3.0.0
+info:
+  title: Pay API
+  version: '1.0'
+  description: "API для оплаты покупок в торговых точках, подключённых к Кошелёк Pay API. \n\nПровайдером API выступает сервер Кошелька. Потребителями API являются кассовое ПО и узлы ЦОД ТСП.\n\n### Параметры подключения\nПартнёру передаются следующие параметры для подключения к Кошелёк Pay API:\n\n| | |\n| ------------- | ------------- |\n| **host:port** | Адрес и порт узла Кошелька, предоставляющего API. |\n| **login:password** | Имя пользователя и пароль для авторизации запросов API (используется [HTTP Basic Authentication](https://tools.ietf.org/html/rfc7617)).  |\n| **Test URL** | URL для тестового подключения: https://api-test.koshelek.app |\n| **Production URL** | URL для промышленного подключения: https://api.koshelek.app  |\n\n### Идентификаторы, участвующие в информационном обмене\nВ информационном обмене с партнёром (ТСП) используется ряд параметров, идентифицирующих ТСП. Параметры перечислены в таблице ниже. <span style=\"background-color:plum\"> Цветом</span> обозначены параметры, передаваемые в случае, если оплата осуществляется через [Систему быстрых платежей (СБП)](https://sbp.nspk.ru/):\n\n| Параметр  | Контекст | Описание |\n| ------------- | ------------- | ------------- |\n| **brandName** | Общий | Фирменное торговое наименование ТСП.|\n| **legalName** | Общий | Полное наименование юридического лица или ИП партнера.|\n| **Stores** | Общий | Полный список торговых точек с их адресами. Для каждой торговой точки Кошелёк выдает идентификатор storeId, который будет необходимо передавать в каждом запросе. |\n| **postbackURL** | Общий, если у кассы есть онлайн-хост | URL, используемый кассой для приёма статуса транзакции от сервера Кошелёк Pay.|\n| **partnerLogin** | Общий, если у кассы есть онлайн-хост | Имя пользователя для авторизации запросов HTTP Basic Authentication (см. выше).|\n| **partnerPassword** | Общий, если у кассы есть онлайн-хост | Пароль для авторизации запросов HTTP Basic Authentication (см. выше).|\n| **merchantId** | <span style=\"background-color:plum\">СБП</span> |Идентификатор, присвоенный ТСП системой СБП. Выдается банком, с которым партнёр заключает договор на эквайринг счета для операций по СБП (банк-получатель).|\n| **account** | <span style=\"background-color:plum\">СБП</span> | Счет юридического лица ТСП в банке-получателе.|\n| **memberId** | <span style=\"background-color:plum\">СБП</span> | Идентификатор банка-участника в \"Системе быстрых платежей\", обслуживающего ТСП.|\n| **Terminals** | Общий | Список идентификаторов кассовых терминалов `terminalId`. Значение присваивается кассе самим ТСП и передается в каждом запросе; предварительно предоставлять полный список не требуется.|\n| **Terminals** |  <span style=\"background-color:plum\">СБП + Тинькофф Банк в качестве эквайера </span>  | Аналогично общему случаю, но для каждого `terminalId` ТСП должен предварительно предоставить связку из двух параметров: <br> `terminalKey` — ключ (идентификатор кассового терминала, присвоенный банком-эквайером). <br> `password` — значение (пароль для данного `terminalKey`). <br> Параметры будут использоваться сервером Кошелька для авторизации подключения к Tinkoff API при оплате.|\n\n### Авторизация запросов\nВзаимодействие осуществляется по протоколу HTTPS. Для авторизации запросов к Pay API необходимо использовать HTTP Basic Authentication ([RFC 7617](https://tools.ietf.org/html/rfc7617)). Данные для авторизации запросов передаются в HTTP-заголовке \"Authorization\".\n\n---\n**Примечание.**\nИспользуемая версия протокола TLS — не ниже 1.2.\n\n---\n### Требования к кодировкам\nКак в запросах, так и в ответах используется кодировка UTF-8.\n\n### Формат и структура сообщений\nВсе методы API ожидают тип данных в заголовке: `Content-Type =\"application/json\"` и возвращают тело ответа в формате `\"application/json\"`.\n\n### Коды HTTP\n---\n#### \U0001F7E2 HTTP: 200\nВ случае успешной обработки запроса, со стороны узла Cardsmobile будет возвращён тип данных, описанный в документации запроса, и HTTP-код `200`.\n\n#### Поле `errorCode`\nВ отдельных сценариях возврат HTTP-кода `200` может сопровождаться передачей сообщения об ошибке. Такое сообщение будет содержаться в теле ответа, в поле `errorCode`. Ниже приведена расшифровка возможных значений поля `errorCode`.\n\n**1. Для сценария оплаты:**\n\n| errorCode | Расшифровка |\n| -------- |------------- |\n| `NOT_ENOUGH_LIMIT_TO_PAY`  | Превышен лимит для совершения операции.|\n| `TOTAL_AMOUNT_IS_TOO_SMALL`  | Сумма покупки ниже установленного лимита (составляет 4 рубля).|\n\n**2. Для сценария возврата:**\n\n| errorCode | Расшифровка |\n| -------- |------------- |\n| `PAYMENT_TRANSACTION_IS_NOT_PAID`  | Возврат отклонен, т.к. транзакция оплаты с данным `transactionId` не была завершена, списание средств не выполнялось.|\n| `TERMINAL_STATE_OF_PAYMENT_TRANSACTION`  | Возврат отклонен по одной из причин:<ul><li>транзакция была отменена ранее, до списания средств;<li>транзакция уже была отклонена провайдером платежей до списания средств;<li>уже был выполнен полный возврат средств.|\n| `PAYMENT_TRANSACTION_IS_BEING_REFUNDED_ALREADY`  | Возврат отклонен, т.к. есть незавершенная транзакция отмены. Дождитесь завершения процесса возврата по транзакции отмены с `refTransactionId` незавершенной предыдущей транзакции отмены.|\n| `REQUESTED_REFUND_AMOUNT_IS_GREATER_THAN_AVAILABLE`  | Возврат отклонен, т.к. запрошенная сумма к возврату превышает сумму оплаты по транзакции оплаты с данным `transactionId`.|\n| `EXTERNAL_PROVIDER_ERROR`  | Общий код ошибки провайдера платежей.|\n| `UNEXPECTED_REFUND_AMOUNT_LEFT_FROM_EXTERNAL_PROVIDER`  | Возврат отклонен, т.к. транзакция оплаты с данным `transactionId` не была завершена, списание средств не выполнялось.|\n\n---\n#### \U0001F534 HTTP: 422\nВ случае ошибки обработки запроса, со стороны узла Cardsmobile будет возвращён HTTP-ответ с кодом `422`, содержащий JSON-объект, описывающий ошибку. В частности, этот объект содержит строковое сообщение с описанием причины ошибки на русском языке.\nСтруктура объекта, описывающего ошибку:\n\n| Поле      | Тип    | Описание |\n| --------- | -------| -------- |\n| `code`    | String | См. [Коды ошибок](#коды-ошибок). |\n| `details` | String | Описание ошибки (необязательное поле, может отсутствовать).|\n\n#### Коды ошибок\n\n| code | Расшифровка |\n| -------- |---- |\n| `UNKNOWN_SESSION_ID`  | `cardSession` не существует/не прошел валидацию.|\n| `UNKNOWN_TRANSACTION_ID`| `tansactionId` не найден.|\n| `UNKNOWN_PARTNER_ID`  | `merchant` не найден.|\n| `WRONG_TRANSACTION_STATE_CHANGE`  | Невозможен перевод транзакции в ожидаемое состояние.|\n| `PAYMENT_TRANSACTION_IS_NOT_PAID`  | Нет оплаты по транзакции оплаты.|\n| `CANCEL_REFUNDING_BY_BANK`  | Возврат отменен банком.|\n| `TRANSACTION_FOR_SESSION_ID_ALREADY_EXISTS`  | Транзакция уже существует.|\n| `TRANSACTION_FOR_SESSION_ID_ALREADY_PAYED`  | Транзакция уже обработана.|\n| `TRANSACTION_IN_PROCESSING`  | Транзакция в обработке.|"
+  contact:
+    email: doc-review@cardsmobile.ru
+servers:
+  - url: 'https://api-test.koshelek.app/'
+    description: Base URL (test)
+  - url: 'https://api.koshelek.app/'
+    description: Base URL (production)
+paths:
+  /api/v1/merchant/availability-info/task:
+    parameters: []
+    post:
+      summary: Запрос списка провайдеров платежей
+      operationId: post-api-v1-merchant-availability-info-task
+      responses:
+        '200':
+          description: Запрос выполнен успешно. Ответ содержит сведения о списке провайдеров платежей (используется синхронный режим).
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    koshelekPayIsDefault: true
+                    paymentTypeAvailabilityInfoList:
+                      - paymentType: SBP
+                        available: true
+                        message: ''
+                      - paymentType: DOLYAME
+                        available: false
+                        message: 'Недоступно по причине низкого кредитного рейтинга: score < 0.2'
+                properties:
+                  koshelekPayIsDefault:
+                    type: boolean
+                    description: 'Флаг автоматического выбора и запуска на кассе оплаты через Кошелёк Pay по умолчанию. Если `true`, то в списке провайдеров платежей `paymentTypeAvailabilityInfoList` всегда будет хотя бы один доступный (`available` = `true`).'
+                  paymentTypeAvailabilityInfoList:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    description: 'Массив, содержащий в себе список доступных провайдеров платежей.'
+                    items:
+                      $ref: '#/components/schemas/PaymentTypeAvailabilityInfo'
+                required:
+                  - koshelekPayIsDefault
+                  - paymentTypeAvailabilityInfoList
+              examples:
+                example-1:
+                  value:
+                    koshelekPayIsDefault: true
+                    paymentTypeAvailabilityInfoList:
+                      - paymentType: SBP
+                        available: true
+                        message: ''
+                      - paymentType: DOLYAME
+                        available: false
+                        message: 'Недоступно по причине низкого кредитного рейтинга: score < 0.2'
+        '201':
+          description: Запрос выполнен успешно. Ответ содержит сведения для отдельного запроса на получение списка доступных провайдеров платежей (используется асинхронный режим).
+          headers:
+            Location:
+              schema:
+                type: string
+                example: 'Location: /api/v1/merchant/availability-info/{availabilityInfoId}'
+              description: 'Содержит URL, который необходимо периодически опрашивать для получения данных о провайдере, используя запрос [`/api/v1/merchant/availability-info/{availabilityInfoId}`](ref#get-api-v1-merchant-availability-info-availabilityinfoid).'
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    availabilityInfoId: ecda679e-f5ab-4250-b622-2a429d714b21
+                    timeout: 350
+                properties:
+                  availabilityInfoId:
+                    $ref: '#/components/schemas/availabilityInfoId'
+                  timeout:
+                    type: integer
+                    description: 'Время, через которое необходимо осуществить первую проверку статуса готовности в запросе [`/api/v1/merchant/availability-info/{availabilityInfoId}`](refs/~1api~1v1~1merchant~1availability-info~1{availabilityInfoId}).'
+                required:
+                  - availabilityInfoId
+                  - timeout
+              examples:
+                example-1:
+                  value:
+                    availabilityInfoId: ecda679e-f5ab-4250-b622-2a429d714b21
+                    timeout: 350
+        '422':
+          $ref: '#/components/responses/422'
+      description: |
+        ТСП передает Кошельку информацию о счете к оплате и создает задачу на получение данных о провайдерах платежей.
+
+        В зависимости от кода ответа на запрос определяется способ получения списка провайдеров платежей:
+
+        **1. Синхронный режим:**
+
+        Ответ на вызов содержит **HTTP Status Code** `200`. При этом в теле ответа содержатся непосредственно запрашиваемые данные о провайдерах платежей.
+
+        **2. Асинхронный режим:** 
+
+        Ответ на вызов содержит **HTTP Status Code** `201`. При этом в теле ответа будет содержаться поле  `availabilityInfoId`, а в HTTP-заголовке **Location** — URL, который необходимо периодически опрашивать для получения данных о провайдере, используя запрос [`/api/v1/merchant/availability-info/{availabilityInfoId}`](https://app.developerhub.io/koshelek/v1.0/pay-api/ref#get-api-v1-merchant-availability-info-availabilityinfoid).
+      parameters:
+        - $ref: '#/components/parameters/token'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  requestId: '1624931549080'
+                  cardsession: '123456'
+                  storeId: ac99f4c8-1a8e-4b60-8aeb-fe20220f1b99
+                  terminalId: mip9e26ay3z2s0oh
+                  checkoutInvoice:
+                    orderId: ac99e4c8-1a7e-4b60-8aeb-fe10110f1b99
+                    totalAmount: 20
+                    discountAmount: 5
+                    subTotalAmount: 20
+                    items:
+                      - name: testName
+                        article: '1111111'
+                        price: null
+                        quantity: 1
+                        totalAmount: 20
+                        discountAmount: 5
+                        subTotalAmount: 100
+                        tax: none
+                  user:
+                    loyaltyId: '000022'
+              properties:
+                requestId:
+                  $ref: '#/components/schemas/requestId'
+                cardsession:
+                  $ref: '#/components/schemas/cardSession'
+                storeId:
+                  $ref: '#/components/schemas/storeId'
+                terminalId:
+                  $ref: '#/components/schemas/terminalId'
+                checkoutInvoice:
+                  $ref: '#/components/schemas/CheckoutInvoice'
+                user:
+                  $ref: '#/components/schemas/User'
+              required:
+                - requestId
+                - cardsession
+                - storeId
+                - terminalId
+                - checkoutInvoice
+                - user
+            examples:
+              task-request-example:
+                value:
+                  requestId: '1624931549080'
+                  cardsession: '123456'
+                  storeId: ac99f4c8-1a8e-4b60-8aeb-fe20220f1b99
+                  terminalId: mip9e26ay3z2s0oh
+                  checkoutInvoice:
+                    orderId: ac99e4c8-1a7e-4b60-8aeb-fe10110f1b99
+                    totalAmount: 20
+                    discountAmount: 5
+                    subTotalAmount: 20
+                    items:
+                      - name: testName
+                        article: '1111111'
+                        price: 10
+                        quantity: 1
+                        totalAmount: 20
+                        discountAmount: 5
+                        subTotalAmount: 100
+                        tax: none
+                  user:
+                    loyaltyId: '000022'
+        description: 'Тело запроса передается в виде объекта JSON следующей структуры:'
+  '/api/v1/merchant/availability-info/{availabilityInfoId}':
+    parameters:
+      - schema:
+          type: string
+        name: availabilityInfoId
+        in: path
+        required: true
+        description: 'Идентификатор, полученный в ответе на запрос [`api/v1/merchant/availability-info/task`](refs/~1api~1v1~1merchant~1availability-info~1task).'
+    get:
+      summary: Получение списка провайдеров платежей
+      tags: []
+      responses:
+        '200':
+          description: 'Запрос выполнен успешно. Тело ответа — объект JSON следующей структуры:'
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    availabilityInfoId: ecda679e-f5ab-4250-b622-2a429d714b21
+                    computationComplete: true
+                    koshelekPayIsDefault: true
+                    paymentTypeAvailabilityInfoList:
+                      - paymentType: SBP
+                        available: true
+                        message: ''
+                      - paymentType: DOLYAME
+                        available: false
+                        message: 'Недоступно по причине низкого кредитного рейтинга: score < 0.2'
+                properties:
+                  availabilityInfoId:
+                    $ref: '#/components/schemas/availabilityInfoId'
+                  computationComplete:
+                    type: boolean
+                    description: Готовность результата запроса (`true` - готов).
+                  pollingTimeout:
+                    description: 'Инструкция от сервера: отправить повторный запрос через указанное время (в миллисекундах). Передается, если `computationComplete` = `false`.'
+                    type: number
+                  koshelekPayIsDefault:
+                    type: boolean
+                    description: 'Флаг автоматического выбора и запуска на кассе оплаты через Кошелёк Pay по умолчанию. Если `true`, то в списке провайдеров платежей `paymentTypeAvailabilityInfoList` всегда будет хотя бы один доступный (`available` = `true`).'
+                  paymentTypeAvailabilityInfoList:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    description: 'Массив, содержащий в себе список доступных провайдеров платежей.'
+                    items:
+                      $ref: '#/components/schemas/PaymentTypeAvailabilityInfo'
+                required:
+                  - availabilityInfoId
+                  - computationComplete
+                  - pollingTimeout
+                  - koshelekPayIsDefault
+                  - paymentTypeAvailabilityInfoList
+              examples:
+                example-1:
+                  value:
+                    availabilityInfoId: ecda679e-f5ab-4250-b622-2a429d714b21
+                    computationComplete: true
+                    koshelekPayIsDefault: true
+                    paymentTypeAvailabilityInfoList:
+                      - paymentType: SBP
+                        available: true
+                        message: ''
+                      - paymentType: DOLYAME
+                        available: false
+                        message: 'Недоступно по причине низкого кредитного рейтинга: score < 0.2'
+        '422':
+          $ref: '#/components/responses/422'
+      operationId: get-api-v1-merchant-availability-info-availabilityInfoId
+      description: |
+        ТСП запрашивает у Кошелька список доступных провайдеров платежей в асинхронном режиме, т. е. если запрос [`/api/v1/merchant/availability-info/task`](refs/~1api~1v1~1merchant~1availability-info~1task) вернул **HTTP Status Code** `201`. 
+
+        В этом случае методы [`/api/v1/merchant/availability-info/task`](refs/~1api~1v1~1merchant~1availability-info~1task) и [`/api/v1/merchant/availability-info/{availabilityInfoId}`](refs/~1api~1v1~1merchant~1availability-info~1{availabilityInfoId}) используются в паре (принцип периодического опроса — поллинга).
+
+        Необходимо последовательно:
+
+        1. Вызвать метод [`api/v1/merchant/availability-info/task`](refs/~1api~1v1~1merchant~1availability-info~1task), получить `availabilityInfoId` (идентификатор, используя который, можно будет впоследствии получить данные), и `timeout` (время, через которое необходимо осуществить первую проверку статуса готовности).
+        2. Вызывать метод [`api/v1/merchant/availability-info/{availabilityInfoId}`](refs/~1api~1v1~1merchant~1availability-info~1{availabilityInfoId}) с периодом ожидания, равным `timeout` для первого вызова и `pollingTimeout` для последующих вызовов до тех пор, пока в ответе поле `computationComplete` не будет содержать значение `true`).
+  /api/v1/merchant/checkout:
+    parameters: []
+    post:
+      summary: Инициализация платежа
+      operationId: post-api-v1-merchant-checkout
+      responses:
+        '200':
+          description: 'Запрос выполнен успешно. Тело ответа — объект JSON следующей структуры:'
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    requestId: 314b0613-ae21-438c-b538-6b965e85d644
+                    transactionId: f9a59682-3d05-4af6-8308-2c1f1665d733
+                    status: new
+                    slip:
+                      id: d95d9f7d-cea2-47c0-b9b5-4e7ad3ee4c63
+                      paymentTransactionId: 48f62a99-50a2-4e0c-a883-4be0a7c62dd7
+                      paymentType: DOLYAME
+                      terminalId: 20210510T120700
+                      storeId: KOSHELEK-42
+                      orderId: 9d913e76-24d9-468d-6c6d-2a41bcfb8d81
+                      merchantId: MA0000103685
+                      operationDateTime: '2022-01-19T11:56:34.323Z'
+                      totalAmount: 15000
+                properties:
+                  requestId:
+                    type: string
+                    description: Уникальный идентификатор запроса.
+                  transactionId:
+                    minLength: 1
+                    type: string
+                    description: Идентификатор транзакции.
+                  status:
+                    type: string
+                    description: Статус транзкации (Enum)
+                    enum:
+                      - new
+                      - canceled
+                      - pending
+                      - rejected
+                      - accepted
+                      - refunding
+                      - refunded
+                      - partial_refunded
+                  slip:
+                    $ref: '#/components/schemas/Slip'
+                required:
+                  - requestId
+                  - transactionId
+                  - status
+                  - slip
+              examples:
+                example-1:
+                  value:
+                    requestId: 314b0613-ae21-438c-b538-6b965e85d644
+                    transactionId: f9a59682-3d05-4af6-8308-2c1f1665d733
+                    status: new
+                    slip:
+                      id: d95d9f7d-cea2-47c0-b9b5-4e7ad3ee4c63
+                      paymentTransactionId: 48f62a99-50a2-4e0c-a883-4be0a7c62dd7
+                      paymentType: DOLYAME
+                      terminalId: 20210510T120700
+                      storeId: KOSHELEK-42
+                      orderId: 9d913e76-24d9-468d-6c6d-2a41bcfb8d81
+                      merchantId: MA0000103685
+                      operationDateTime: '2022-01-19T11:56:34.323Z'
+                      totalAmount: 15000
+        '422':
+          $ref: '#/components/responses/422'
+      description: 'ТСП передает Кошельку информацию о счёте к оплате и значение `cardSession` пользователя, который должен оплатить этот счёт.'
+      parameters:
+        - $ref: '#/components/parameters/token'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  requestId: 4ee64eb1-0012-4cd0-aefe-966d48ea7b71
+                  cardSession: A1G97N
+                  storeId: ac99f4c8-1a8e-4b60-8aeb-fe20220f1b99
+                  terminalId: mip9e26ay3z2s0oh
+                  checkoutInvoice:
+                    orderId: '12345'
+                    totalAmount: '14245'
+                    discountAmount: '100'
+                    subTotalAmount: '14345'
+                    items:
+                      - name: Товар 1
+                        article: '1111111'
+                        price: 10000
+                        quantity: 1
+                        totalAmount: 1900
+                        discountAmount: 100
+                        subTotalAmount: 2000
+                        tax: vat10
+                      - name: Товар 2
+                        article: '2222222'
+                        price: 12345
+                        quantity: 1
+                        totalAmount: 12345
+                        discountAmount: 15
+                        subTotalAmount: 3000
+                        tax: vat20
+                  user:
+                    loyaltyId: '1234567891011'
+                  paymentMethods:
+                    - type: SBP
+              properties:
+                requestId:
+                  $ref: '#/components/schemas/requestId'
+                cardSession:
+                  $ref: '#/components/schemas/cardSession'
+                storeId:
+                  $ref: '#/components/schemas/storeId'
+                terminalId:
+                  $ref: '#/components/schemas/terminalId'
+                checkoutInvoice:
+                  $ref: '#/components/schemas/CheckoutInvoice'
+                user:
+                  $ref: '#/components/schemas/User'
+                paymentMethods:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  items:
+                    $ref: '#/components/schemas/PaymentMethod'
+              required:
+                - requestId
+                - cardSession
+                - storeId
+                - terminalId
+                - checkoutInvoice
+                - user
+                - paymentMethods
+            examples:
+              example-1:
+                value:
+                  requestId: 4ee64eb1-0012-4cd0-aefe-966d48ea7b71
+                  cardSession: A1G97N
+                  storeId: ac99f4c8-1a8e-4b60-8aeb-fe20220f1b99
+                  terminalId: mip9e26ay3z2s0oh
+                  checkoutInvoice:
+                    orderId: '12345'
+                    totalAmount: 14245
+                    discountAmount: 100
+                    subTotalAmount: 14345
+                    items:
+                      - name: Товар 1
+                        article: '1111111'
+                        price: 10000
+                        quantity: 1
+                        totalAmount: 1900
+                        discountAmount: 100
+                        subTotalAmount: 2000
+                        tax: vat10
+                      - name: Товар 2
+                        article: '2222222'
+                        price: 12345
+                        quantity: 1
+                        totalAmount: 12345
+                        discountAmount: 15
+                        subTotalAmount: 3000
+                        tax: vat20
+                  user:
+                    loyaltyId: '1234567891011'
+                  paymentMethods:
+                    - type: SBP
+        description: 'Тело запроса передается в виде объекта JSON следующей структуры:'
+  /api/v1/merchant/transaction/status:
+    post:
+      summary: Получение статуса транзакции
+      operationId: post-api-v1-merchant-transaction-status
+      responses:
+        '200':
+          description: 'Запрос выполнен успешно. Тело ответа — объект JSON следующей структуры:'
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    requestId: ab182f20-9c5a-11ea-ab12-0800200c9a66
+                    transactionId: 9dcc19d0-9c5a-11ea-ab12-0800200c9a66
+                    status: pending
+                    paymentGroup: INSTALLMENT
+                    paymentProvider: DOLYAME
+                properties:
+                  requestId:
+                    type: string
+                    minLength: 1
+                    description: Уникальный идентификатор запроса.
+                  transactionId:
+                    type: string
+                    minLength: 1
+                    description: Идентификатор транзакции оплаты.
+                  refTransactionId:
+                    type: string
+                    minLength: 1
+                    description: Идентификатор транзакции отмены.
+                  status:
+                    type: string
+                    description: 'Статус тразкации (Enum, или пустое значение, если указанный в запросе `transactionId` не найден).'
+                    enum:
+                      - new
+                      - canceled
+                      - pending
+                      - rejected
+                      - accepted
+                      - refunding
+                      - partial_refunded
+                  paymentGroup:
+                    type: string
+                    description: 'Категория оплат (Enum: `INSTALLMENT` - в рассрочку/частями, `SBP` - через СБП).'
+                    enum:
+                      - INSTALLMENT
+                      - SBP
+                  paymentProvider:
+                    type: string
+                    enum:
+                      - DOLYAME
+                    description: 'Тип провайдера (Enum: `DOLYAME` - Долями).'
+                  slip:
+                    $ref: '#/components/schemas/Slip'
+                  refStatus:
+                    type: string
+                    description: 'Статус транзакции отмены (Enum: `new`, `rejected` - отмена отклонена, оплата не возвращена покупателю, `accepted` - отмена одобрена).'
+                    enum:
+                      - new
+                      - rejected
+                      - accepted
+                  errorCode:
+                    type: string
+                    description: 'Код ошибки, возникшей при выполнении операции оплаты или возврата. Передается только для `status` = `rejected`.'
+                    enum:
+                      - NOT_ENOUGH_LIMIT_TO_PAY
+                      - TOTAL_AMOUNT_IS_TOO_SMALL
+                      - PAYMENT_TRANSACTION_IS_NOT_PAID
+                      - TERMINAL_STATE_OF_PAYMENT_TRANSACTION
+                      - PAYMENT_TRANSACTION_IS_BEING_REFUNDED_ALREADY
+                      - REQUESTED_REFUND_AMOUNT_IS_GREATER_THAN_AVAILABLE
+                      - EXTERNAL_PROVIDER_ERROR
+                      - UNEXPECTED_REFUND_AMOUNT_LEFT_FROM_EXTERNAL_PROVIDER
+                required:
+                  - requestId
+                  - transactionId
+                  - status
+                  - paymentGroup
+                  - paymentProvider
+              examples:
+                example-1:
+                  value:
+                    requestId: ab182f20-9c5a-11ea-ab12-0800200c9a66
+                    transactionId: 9dcc19d0-9c5a-11ea-ab12-0800200c9a66
+                    status: pending
+                    paymentGroup: INSTALLMENT
+                    paymentProvider: DOLYAME
+            text/plain:
+              schema:
+                type: object
+                properties: {}
+        '422':
+          $ref: '#/components/responses/422'
+      description: |
+        Ответ со статусами платёжной транзкации и транзакции отмены.
+
+        **a. Реализация приема postback/callback-ответов от Кошелька**
+
+        ТСП необходимо реализовать на своей стороне метод, который будет вызывать сервер Кошелька для передачи ТСП статуса платежа. Этот способ получения статуса является предпочтительным, т.к. в данном случае сервер Кошелька сразу передает ТСП ответ, и ТСП не нужно работать в режиме polling c сервером Кошелька с запросом **b** в ожидании ответа с финальным статусом транзакции.
+
+        Сервер Кошелька должен передавать при вызове метода тот же объект, который возвращает в response на вызов **b**.
+
+        Схема работы через периодические вызовы метода **b** со стороны ТСП должна использоваться в случае технической невозможности подключения сервера Кошелька к серверу ТСП (или напрямую к кассам) для передачи ответов через postback.
+
+        Request body: см. Response body в пункте **b**.
+
+        **b. Реализация подключения к методу получения статуса от сервера Кошелька**
+
+        ---
+        **Рекомендации по вызову метода:**
+
+        Статус транзакции необходимо запрашивать:
+
+        1. В первый раз: не раньше чем через 250 мс и не позже чем через 500 мс.
+        2. Дальнейшие вызовы должны быть не чаще чем раз в 250 мс.
+        3. Касса должна ожидать статус не дольше, чем 30 секунд, и вызывать отмену оплаты, если время ожидания превышено.
+        Конкретная реализация остается на усмотрение ТСП, но важно убедиться, что не остается никакого потока, который продолжает опрашивать серверы Кошелька.
+
+        ---
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  requestId: ab182f20-9c5a-11ea-ab12-0800200c9a66
+                  transactionId: 9dcc19d0-9c5a-11ea-ab12-0800200c9a66
+              properties:
+                requestId:
+                  $ref: '#/components/schemas/requestId'
+                transactionId:
+                  type: string
+                  description: 'Идентификатор транзакции оплаты (GUID, 36 символов). Необязателен, если передается `refTransactionId`.'
+                refTransactionId:
+                  type: string
+                  description: 'Идентификатор транзакции отмены (GUID, 36 символов). Необязателен, если передается `transactionId`.'
+              required:
+                - requestId
+        description: 'Тело запроса передаётся в виде объекта JSON следующей структуры:'
+  /api/v1/merchant/transaction/receipt:
+    post:
+      summary: Отправка чека
+      operationId: post-api-v1-merchant-transaction-receipt
+      responses:
+        '200':
+          description: Запрос выполнен успешно. Тело ответа — пустое.
+        '422':
+          $ref: '#/components/responses/422'
+      description: ТСП передает Кошельку информацию о фискальном чеке для его отображения пользователю в Кошельке.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  requestId: 045b22e0-9c5b-11ea-ab12-0800200c9a66
+                  transactionId: 9dcc19d0-9c5a-11ea-ab12-0800200c9a66
+                  storeId: ac99f4c8-1a8e-4b60-8aeb-fe20220f1b99
+                  terminalId: mip9e26ay3z2s0oh
+                  invoice:
+                    orderId: '12345'
+                    receiptId: '6789'
+                    merchantName: ООО Торговая сеть №1
+                    merchantAddress: '198000 г. Санкт-Петербург, ул.Ленина д.1 пом.123'
+                    inn: '001234567891'
+                    dateTime: '2020-05-20T20:50:00+03:00'
+                    shift: '5'
+                    cashier: Иванов Иван Иванович
+                    taxation: osn
+                    kktRegNumber: '0004147503041443'
+                    fnNumber: '9280440300387752'
+                    fdNumber: '0000010272'
+                    fpd: '2374313442'
+                    website: nalog.ru
+                    receiptType: debit
+                    QR: t=20200520T2050&s=859.00&fn=9280440300387752&i=10272&fp=2374313442&n=1
+                    totalAmount: '14245'
+                    discountAmount: '100'
+                    subTotalAmount: '14345'
+                    items:
+                      - name: Товар 1
+                        article: '1111111'
+                        price: 10000
+                        quantity: 1
+                        totalAmount: 1900
+                        discountAmount: 100
+                        subTotalAmount: 2000
+                        tax: vat10
+                      - name: Товар 2
+                        article: '2222222'
+                        price: 12345
+                        quantity: 1
+                        totalAmount: 12345
+                        discountAmount: 15
+                        subTotalAmount: 3000
+                        tax: vat20
+              properties:
+                requestId:
+                  $ref: '#/components/schemas/requestId'
+                transactionId:
+                  $ref: '#/components/schemas/transactionId'
+                storeId:
+                  $ref: '#/components/schemas/storeId'
+                terminalId:
+                  $ref: '#/components/schemas/terminalId'
+                invoice:
+                  $ref: '#/components/schemas/Invoice'
+                meta:
+                  type: object
+                  description: 'Объект, содержащий дополнительные поля, например: скидки, бонусы и т.д. (набор пар "ключ-значение").'
+              required:
+                - requestId
+                - transactionId
+                - storeId
+                - terminalId
+                - invoice
+            examples:
+              example-1:
+                value:
+                  requestId: 045b22e0-9c5b-11ea-ab12-0800200c9a66
+                  transactionId: 9dcc19d0-9c5a-11ea-ab12-0800200c9a66
+                  storeId: ac99f4c8-1a8e-4b60-8aeb-fe20220f1b99
+                  terminalId: mip9e26ay3z2s0oh
+                  invoice:
+                    orderId: '12345'
+                    receiptId: '6789'
+                    merchantName: ООО Торговая сеть №1
+                    merchantAddress: '198000 г. Санкт-Петербург, ул.Ленина д.1 пом.123'
+                    inn: '001234567891'
+                    dateTime: '2020-05-20T20:50:00+03:00'
+                    shift: '5'
+                    cashier: Иванов Иван Иванович
+                    taxation: osn
+                    kktRegNumber: '0004147503041443'
+                    fnNumber: '9280440300387752'
+                    fdNumber: '0000010272'
+                    fpd: '2374313442'
+                    website: nalog.ru
+                    receiptType: debit
+                    QR: t=20200520T2050&s=859.00&fn=9280440300387752&i=10272&fp=2374313442&n=1
+                    totalAmount: '14245'
+                    discountAmount: '100'
+                    subTotalAmount: '14345'
+                    items:
+                      - name: Товар 1
+                        article: '1111111'
+                        price: 10000
+                        quantity: 1
+                        totalAmount: 1900
+                        discountAmount: 100
+                        subTotalAmount: 2000
+                        tax: vat10
+                      - name: Товар 2
+                        article: '2222222'
+                        price: 12345
+                        quantity: 1
+                        totalAmount: 12345
+                        discountAmount: 15
+                        subTotalAmount: 3000
+                        tax: vat20
+        description: ''
+    parameters: []
+  /api/v1/merchant/transaction/cancel:
+    post:
+      summary: Отмена оплаты
+      operationId: post-api-v1-merchant-transaction-cancel
+      responses:
+        '200':
+          description: 'Запрос выполнен успешно. Тело ответа — объект JSON следующей структуры:'
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    requestId: requestId
+                    refTransactionId: 59ab316c-4de4-4e0d-8d07-448b2c7f25a7
+                    refStatus: accepted
+                    transactionId: 6b66835f-a82a-4385-bd98-e9a5047e88fa
+                    status: canceled
+                    slip:
+                      id: d95d9f7d-cea2-47c0-b9b5-4e7ad3ee4c63
+                      paymentTransactionId: 48f62a99-50a2-4e0c-a883-4be0a7c62dd7
+                      paymentType: DOLYAME
+                      terminalId: 20210510T120700
+                      storeId: KOSHELEK-42
+                      orderId: 9d913e76-24d9-468d-6c6d-2a41bcfb8d81
+                      merchantId: MA0000103685
+                      operationDateTime: '2022-01-19T11:56:34.323Z'
+                      totalAmount: 15000
+                properties:
+                  requestId:
+                    minLength: 1
+                    type: string
+                    description: Уникальный идентификатор запроса.
+                  refTransactionId:
+                    minLength: 1
+                    type: string
+                    description: Идентификатор транзакции отмены.
+                  refStatus:
+                    type: string
+                    enum:
+                      - new
+                      - rejected
+                      - accepted
+                    description: 'Статус транзакции отмены (Enum: `new`, `rejected` - отмена отклонена (перечень причин указан в таблице в описании сценария отмены), `accepted` - отмена одобрена).'
+                  transactionId:
+                    $ref: '#/components/schemas/transactionId'
+                  status:
+                    type: string
+                    description: 'Статус транзакции оплаты, в который она перешла после вызова отмены (или в котором она осталась, если отмена была отклонена).'
+                    enum:
+                      - new
+                      - canceled
+                      - pending
+                      - rejected
+                      - accepted
+                      - refunding
+                      - refunded
+                      - partial_refunded
+                      - none
+                  slip:
+                    $ref: '#/components/schemas/Slip'
+                required:
+                  - requestId
+                  - refTransactionId
+                  - refStatus
+                  - transactionId
+                  - status
+                  - slip
+              examples:
+                example-1:
+                  value:
+                    requestId: requestId
+                    refTransactionId: 59ab316c-4de4-4e0d-8d07-448b2c7f25a7
+                    refStatus: accepted
+                    transactionId: 6b66835f-a82a-4385-bd98-e9a5047e88fa
+                    status: canceled
+                    slip:
+                      id: d95d9f7d-cea2-47c0-b9b5-4e7ad3ee4c63
+                      paymentTransactionId: 48f62a99-50a2-4e0c-a883-4be0a7c62dd7
+                      paymentType: DOLYAME
+                      terminalId: 20210510T120700
+                      storeId: KOSHELEK-42
+                      orderId: 9d913e76-24d9-468d-6c6d-2a41bcfb8d81
+                      merchantId: MA0000103685
+                      operationDateTime: '2022-01-19T11:56:34.323Z'
+                      totalAmount: 15000
+        '422':
+          $ref: '#/components/responses/422'
+      description: |-
+        ТСП передает Кошельку запрос на отмену транзакции оплаты.
+
+        В запросе не указывается сумма отмены, т.к. операция отмены проводится на полную сумму, указанную в транзакции оплаты.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  requestId: f1847360-b3c5-11ea-8b6e-0800200c9a66
+                  storeId: ac99f4c8-1a8e-4b60-8aeb-fe20220f1b99
+                  terminalId: mip9e26ay3z2s0oh
+                  transactionId: 9dcc19d0-9c5a-11ea-ab12-0800200c9a66
+              properties:
+                requestId:
+                  $ref: '#/components/schemas/requestId'
+                storeId:
+                  $ref: '#/components/schemas/storeId'
+                terminalId:
+                  $ref: '#/components/schemas/terminalId'
+                transactionId:
+                  $ref: '#/components/schemas/transactionId'
+              required:
+                - requestId
+                - storeId
+                - terminalId
+                - transactionId
+            examples:
+              example-1:
+                value:
+                  requestId: f1847360-b3c5-11ea-8b6e-0800200c9a66
+                  storeId: ac99f4c8-1a8e-4b60-8aeb-fe20220f1b99
+                  terminalId: mip9e26ay3z2s0oh
+                  transactionId: 9dcc19d0-9c5a-11ea-ab12-0800200c9a66
+        description: 'Тело запроса передается в виде объекты JSON следующей структуры:'
+    parameters: []
+  /api/v1/merchant/transaction/refund:
+    post:
+      summary: Возврат оплаты
+      operationId: post-api-v1-merchant-transaction-refund
+      responses:
+        '200':
+          description: 'Запрос выполнен успешно. Тело ответа — объект JSON следующей структуры:'
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    requestId: 314b0613-ae21-438c-b538-6b965e85d644
+                    refTransactionId: 665857e3-25ca-4bd2-b2ec-87c994eff47a
+                    refStatus: accepted
+                    transactionId: f9a59682-3d05-4af6-8308-2c1f1665d733
+                    status: refunded
+                    slip:
+                      id: d95d9f7d-cea2-47c0-b9b5-4e7ad3ee4c63
+                      paymentTransactionId: 48f62a99-50a2-4e0c-a883-4be0a7c62dd7
+                      paymentType: DOLYAME
+                      terminalId: 20210510T120700
+                      storeId: KOSHELEK-42
+                      orderId: 9d913e76-24d9-468d-6c6d-2a41bcfb8d81
+                      merchantId: MA0000103685
+                      operationDateTime: '2022-01-19T11:56:34.323Z'
+                      totalAmount: 15000
+                properties:
+                  requestId:
+                    type: string
+                    description: Уникальный идентификатор запроса.
+                  refTransactionId:
+                    type: string
+                    description: Идентификатор транзакции возврата.
+                  refStatus:
+                    type: string
+                    description: 'Статус транзакции возврата (Enum: `new`, `rejected` - возврат отклонен, `accepted` - возврат одобрен).'
+                    enum:
+                      - new
+                      - rejected
+                      - accepted
+                  transactionId:
+                    type: string
+                    minLength: 1
+                  status:
+                    type: string
+                    description: 'Статус транзакции оплаты, в который она перешла после вызова отмены (или в котором она осталась, если отмена была отклонена.'
+                    enum:
+                      - new
+                      - canceled
+                      - pending
+                      - rejected
+                      - accepted
+                      - refunding
+                      - refunded
+                      - partial_refunded
+                      - none
+                  slip:
+                    $ref: '#/components/schemas/Slip'
+                  errorCode:
+                    type: string
+                    description: 'Код ошибки, возникшей при выполнении операции возврата. Передается только для `status` = `rejected`.'
+                    enum:
+                      - PAYMENT_TRANSACTION_IS_NOT_PAID
+                      - TERMINAL_STATE_OF_PAYMENT_TRANSACTION
+                      - PAYMENT_TRANSACTION_IS_BEING_REFUNDED_ALREADY
+                      - REQUESTED_REFUND_AMOUNT_IS_GREATER_THAN_AVAILABLE
+                      - EXTERNAL_PROVIDER_ERROR
+                      - UNEXPECTED_REFUND_AMOUNT_LEFT_FROM_EXTERNAL_PROVIDER
+                required:
+                  - requestId
+                  - refTransactionId
+                  - refStatus
+                  - transactionId
+                  - status
+                  - slip
+              examples:
+                example-1:
+                  value:
+                    requestId: 314b0613-ae21-438c-b538-6b965e85d644
+                    refTransactionId: 665857e3-25ca-4bd2-b2ec-87c994eff47a
+                    refStatus: accepted
+                    transactionId: f9a59682-3d05-4af6-8308-2c1f1665d733
+                    status: refunded
+                    slip:
+                      id: d95d9f7d-cea2-47c0-b9b5-4e7ad3ee4c63
+                      paymentTransactionId: 48f62a99-50a2-4e0c-a883-4be0a7c62dd7
+                      paymentType: DOLYAME
+                      terminalId: 20210510T120700
+                      storeId: KOSHELEK-42
+                      orderId: 9d913e76-24d9-468d-6c6d-2a41bcfb8d81
+                      merchantId: MA0000103685
+                      operationDateTime: '2022-01-19T11:56:34.323Z'
+                      totalAmount: 15000
+        '422':
+          $ref: '#/components/responses/422'
+      description: 'ТСП передает Кошельку запрос на возврат покупателю средств, полученных в результате транзакции оплаты.'
+      parameters:
+        - $ref: '#/components/parameters/token'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  requestId: f1847360-b3c5-11ea-8b6e-0800200c9a66
+                  transactionId: 9dcc19d0-9c5a-11ea-ab12-0800200c9a66
+                  storeId: ac99f4c8-1a8e-4b60-8aeb-fe20220f1b99
+                  terminalId: mip9e26ay3z2s0oh
+                  refundAmount: 14245
+                  items:
+                    - name: Товар 1
+                      price: 10000
+                      quantity: 1
+                      totalAmount: 1900
+                      discount: 100
+                      subTotalAmount: 2000
+                      tax: vat10
+                    - name: Товар 2
+                      price: 12345
+                      quantity: 1
+                      totalAmount: 12345
+                      tax: vat20
+              properties:
+                requestId:
+                  $ref: '#/components/schemas/requestId'
+                storeId:
+                  $ref: '#/components/schemas/storeId'
+                terminalId:
+                  $ref: '#/components/schemas/terminalId'
+                transactionId:
+                  $ref: '#/components/schemas/transactionId'
+                refundAmount:
+                  type: number
+                  description: Сумма возврата в копейках. Не должна превышать сумму оплаты. Только положительное значение.
+                items:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  items:
+                    $ref: '#/components/schemas/Item'
+              required:
+                - requestId
+                - storeId
+                - terminalId
+                - transactionId
+                - refundAmount
+                - items
+            examples:
+              example-1:
+                value:
+                  requestId: f1847360-b3c5-11ea-8b6e-0800200c9a66
+                  transactionId: 9dcc19d0-9c5a-11ea-ab12-0800200c9a66
+                  storeId: ac99f4c8-1a8e-4b60-8aeb-fe20220f1b99
+                  terminalId: mip9e26ay3z2s0oh
+                  refundAmount: 14245
+                  items:
+                    - name: Товар 1
+                      price: 10000
+                      quantity: 1
+                      totalAmount: 1900
+                      discount: 100
+                      subTotalAmount: 2000
+                      tax: vat10
+                    - name: Товар 2
+                      price: 12345
+                      quantity: 1
+                      totalAmount: 12345
+                      tax: vat20
+        description: 'Тело запроса передается в виде объекта JSON следующей структуры:'
+    parameters: []
+components:
+  schemas:
+    CheckoutInvoice:
+      description: Объект содержит данные о пречеке.
+      type: object
+      x-examples:
+        CheckoutInvoice:
+          orderId: ac99e4c8-1a7e-4b60-8aeb-fe10110f1b99
+          totalAmount: 20
+          discountAmount: 5
+          subTotalAmount: 20
+          items:
+            - name: itemName
+              article: '1111111'
+              price: 100
+              quantity: 1
+              totalAmount: 100
+              discountAmount: 5
+              subTotalAmount: 100
+              tax: none
+      title: Object "CheckoutInvoice"
+      properties:
+        orderId:
+          type: string
+          description: Номер пречека (идентификатор покупки в системе ТСП). До 36 символов.
+        totalAmount:
+          type: number
+          description: 'Сумма к оплате (итоговая, с учетом скидки) в копейках. Неотрицательное число, не более 10 цифр.'
+        discountAmount:
+          type: number
+          description: 'Сумма скидки в копейках. Неотрицательное число, не более 10 цифр.'
+        subTotalAmount:
+          type: number
+          description: 'Полная сумма без учета скидки в копейках (включая НДС). Неотрицательное число, не более 10 цифр.'
+        items:
+          type: array
+          description: 'Массив товаров, включенных в покупку.'
+          items:
+            $ref: '#/components/schemas/Item'
+      required:
+        - orderId
+        - totalAmount
+        - items
+    Item:
+      title: Object "Item"
+      type: object
+      description: 'Объект описывает отдельное товарное наименование, оплаченное с помощью Кошелёк Pay.'
+      x-examples:
+        Item:
+          name: item name
+          article: '1111111'
+          price: 110
+          quantity: 1
+          totalAmount: 100
+          discountAmount: 5
+          subtotalAmount: 110
+          tax: none
+      properties:
+        name:
+          type: string
+          description: Наименование товара.
+        article:
+          type: string
+          description: Артикул.
+        price:
+          type: number
+          description: Цена за единицу в копейках.
+        quantity:
+          type: number
+          description: Количество.
+        totalAmount:
+          type: number
+          description: Сумма к оплате (итоговая) в копейках.
+        discountAmount:
+          type: number
+          description: Сумма скидки в копейках.
+        subtotalAmount:
+          type: number
+          description: 'Полная сумма без учета скидки, в копейках.'
+        tax:
+          type: string
+          enum:
+            - none
+            - vat0
+            - vat10
+            - vat20
+            - vat110
+            - vat120
+          description: 'Ставка налога, Enum: `none` - без НДС, `vat0` - НДС 0%, `vat10` - НДС 10%, `vat20` - НДС 20%, `vat110` - НДС по расчетной ставке 10/110, `vat120` - НДС по расчетной ставке 20/120.'
+      required:
+        - name
+        - article
+        - price
+        - quantity
+        - totalAmount
+        - tax
+    User:
+      title: Object "User"
+      type: object
+      description: 'Объект содержит данные о пользователе (клиенте, совершающем покупку).'
+      x-examples:
+        User:
+          loyaltyId: '000022'
+      properties:
+        loyaltyId:
+          type: string
+          description: Идентификатор клиента в программе лояльности (ключ карты лояльности).
+          maxLength: 36
+      required:
+        - loyaltyId
+    PaymentTypeAvailabilityInfo:
+      title: Object "PaymentTypeAvailabilityInfo"
+      type: object
+      description: Объект содержит сведения о провайдере платежей.
+      properties:
+        paymentType:
+          type: string
+          description: Наименование провайдера платежей (до 36 символов).
+          maxLength: 36
+        available:
+          type: boolean
+          description: Доступность провайдера платежей (`true` - доступен).
+        message:
+          type: string
+          description: Дополнительная информация о провайдере.
+      required:
+        - paymentType
+        - available
+      x-examples:
+        PaymentTypeAvailabilityInfo:
+          paymentType: SBP
+          available: true
+          message: ''
+    Slip:
+      title: Object "Slip"
+      type: object
+      description: 'Объект содержит данные о проведённой банковской операции. Передаётся, если операция оплаты была проведена через банк (`status` = `accepted`, `rejected`), или если был произведён возврат оплаты (status = `refunded`, `partial_refunded`).'
+      properties:
+        id:
+          type: string
+          description: Внутренний идентификатор объекта **Slip** в Кошелёк Pay.
+        paymentType:
+          type: string
+          enum:
+            - SBP
+            - DOLYAME
+          description: 'Механизм оплаты, Enum: `SBP` - СБП, `DOLYAME` - Долями).'
+        storeId:
+          type: string
+          description: Идентификатор торговой точки (см. Подключение к API).
+        terminalId:
+          type: string
+          description: Идентификатор кассы.
+        orderId:
+          type: string
+          description: Номер пречека (идентификатор покупки в системе ТСП).
+        paymentTransactionId:
+          type: string
+          description: Идентификатор транзакции (покупки) в Кошелёк Pay.
+        refundTransactionId:
+          type: string
+        merchantId:
+          type: string
+          description: 'Идентификатор ТСП, выданный банком-получателем. Обязателен для оплаты через СБП (`paymentType` = `SBP`).'
+        operationDateTime:
+          type: string
+          format: date-time
+          example: '2019-08-24T14:15:22Z'
+          description: 'Дата транзакции в формате `yyyy-MM-dd''T''HH:mm:ss.SSSZ`. Часовой пояс всегда равен `Z`(+0).'
+        operationId:
+          type: string
+          description: 'Идентификатор транзакции, присвоенный банком.'
+        qrcId:
+          type: string
+          description: 'Идентификатор транзакции, зарегистрированный в СБП. Обязателен для оплаты через СБП (`paymentType` = `SBP`)'
+        totalAmount:
+          type: number
+          description: Оплаченная сумма (в копейках).
+      required:
+        - id
+        - paymentType
+        - storeId
+        - terminalId
+        - orderId
+        - paymentTransactionId
+        - merchantId
+        - operationDateTime
+        - qrcId
+        - totalAmount
+      x-examples:
+        slip:
+          id: d95d9f7d-cea2-47c0-b9b5-4e7ad3ee4c63
+          paymentTransactionId: 48f62a99-50a2-4e0c-a883-4be0a7c62dd7
+          paymentType: DOLYAME
+          terminalId: 20210510T120700
+          storeId: KOSHELEK-42
+          orderId: 9d913e76-24d9-468d-6c6d-2a41bcfb8d81
+          merchantId: MA0000103685
+          operationDateTime: '2022-01-19T11:56:34.323Z'
+          totalAmount: 15000
+    PaymentMethod:
+      title: Object "PaymentMethod"
+      type: object
+      description: Объект описывает используемый метод оплаты.
+      x-examples:
+        example-1:
+          type: SBP
+      properties:
+        type:
+          type: string
+          enum:
+            - SBP
+            - DOLYAME
+          description: 'Механизм оплаты, Enum: `SBP` - СБП, `DOLYAME` - Долями.'
+        meta:
+          type: object
+          description: 'Объект, содержащий дополнительные поля, например: скидки, бонусы и т.д. (набор пар "ключ-значение").'
+      required:
+        - type
+    Invoice:
+      type: object
+      title: Object "Invoice"
+      description: Объект содержит сведения о фискальном чеке.
+      maxProperties: 36
+      x-examples:
+        Invoice:
+          orderId: '12345'
+          receiptId: '6789'
+          merchantName: ООО Торговая сеть №1
+          merchantAddress: '198000 г. Санкт-Петербург, ул.Ленина д.1 пом.123'
+          inn: '001234567891'
+          dateTime: '2020-05-20T20:50:00+03:00'
+          shift: '5'
+          cashier: Иванов Иван Иванович
+          taxation: osn
+          kktRegNumber: '0004147503041443'
+          fnNumber: '9280440300387752'
+          fpd: '2374313442'
+          fdNumber: '0000010272'
+          website: nalog.ru
+          receiptType: debit
+          totalAmount: 14245
+          discountAmount: 100
+          subTotalAmount: 14345
+          taxAmount: 55
+          qr: t=20200520T2050&s=859.00&fn=9280440300387752&i=10272&fp=2374313442&n=1
+          items:
+            - name: Товар 1
+              article: '1111111'
+              price: 10000
+              quantity: 1
+              totalAmount: 1900
+              discountAmount: 100
+              subTotalAmount: 2000
+              tax: vat10
+            - name: Товар 2
+              article: '2222222'
+              price: 12345
+              quantity: 1
+              totalAmount: 12345
+              discountAmount: 15
+              subTotalAmount: 3000
+              tax: vat20
+      properties:
+        orderId:
+          type: string
+          description: Номер пречека (до 36 символов).
+          maxLength: 36
+        receiptId:
+          type: string
+          maxLength: 36
+          description: Номер чека (до 36 символов).
+        merchantName:
+          type: string
+          maxLength: 999
+          description: Полное название ТСП (до 999 символов).
+        merchantAddress:
+          type: string
+          maxLength: 999
+          description: Адрес ТСП (до 999 символов).
+        inn:
+          type: string
+          minLength: 12
+          maxLength: 12
+          description: ИНН ТСП (ровно 12 символов; для ЮЛ начинается с `00`).
+        dateTime:
+          type: string
+          format: date-time
+          description: 'Дата в формате: `YYYY-MM-DDTHH24:MI:SS+GMT`'
+        shift:
+          type: string
+          maxLength: 32
+          description: Смена (до 32 символов).
+        cashier:
+          type: string
+          maxLength: 256
+          description: ФИО или номер кассира (до 256 символов).
+        taxation:
+          type: string
+          enum:
+            - osn
+            - usn_income
+            - usn_income_out
+            - envd
+            - esn
+            - patent
+          description: 'Система налогообложения, Enum: `osn` - общая СН, `usn_income` - упрощенная СН (доходы), `usn_income_out` - упрощенная СН (доходы минус расходы), `envd` - единый налог на вмененный доход, `esn` - единый сельскохозяйственный налог, `patent` - патентная СН.'
+        kktRegNumber:
+          type: string
+          maxLength: 64
+          description: Регистрационный номер ККТ (до 64 символов).
+        fnNumber:
+          type: string
+          maxLength: 64
+          description: Номер фискального накопителя (до 64 символов).
+        fpd:
+          type: string
+          maxLength: 64
+          description: Фискальный признак документа (до 64 символов).
+        fdNumber:
+          type: string
+          maxLength: 64
+          description: Номер фискального документа (до 64 символов).
+        website:
+          type: string
+          maxLength: 64
+          description: 'Адрес веб-сайта для проверки данных чека (например, nalog.ru) (до 64 символов).'
+        receiptType:
+          type: string
+          enum:
+            - debit
+            - credit
+            - refund
+          description: 'Признак расчета, Enum: `debit` - приход, `credit` - расход, `refund` - возврат.'
+        totalAmount:
+          type: number
+          description: 'Сумма к оплате в копейках (итоговая). Неотрицательное число, до 10 цифр.'
+        discountAmount:
+          type: number
+          description: 'Сумма скидки в копейках. Неотрицательное число, до 10 цифр.'
+        subTotalAmount:
+          type: number
+          description: 'Полная сумма без учета скидки в копейках. Неотрицательное число, до 10 цифр.'
+        taxAmount:
+          type: number
+          description: 'Сумма налога в копейках. Неотрицательное число, до 10 цифр.'
+        qr:
+          type: string
+          maxLength: 999
+          description: QR-код для загрузки электронной версии чека (до 999 символов).
+        items:
+          type: array
+          description: 'Массив товаров, включенных в покупку.'
+          items:
+            $ref: '#/components/schemas/Item'
+      required:
+        - orderId
+        - receiptId
+        - merchantName
+        - merchantAddress
+        - inn
+        - dateTime
+        - shift
+        - cashier
+        - receiptType
+        - totalAmount
+        - taxAmount
+        - items
+    requestId:
+      title: requestId
+      type: string
+      description: |-
+        Уникальный идентификатор запроса (GUID, не более 36 символов).
+
+        <span style="background-color:LemonChiffon">Если по каким-либо причинам ответ на запрос не получен от Кошелька, то можно отправить этот запрос повторно, используя то же самое значение параметра `requestId` (действует правило идемпотентности).</span> 
+    storeId:
+      type: string
+      title: storeId
+      description: 'Идентификтор ТСП, выданный Cardsmobile при его подключении (GUID, 36 символов).'
+      minLength: 36
+      maxLength: 36
+      x-examples:
+        example-1: ac99f4c8-1a8e-4b60-8aeb-fe20220f1b99
+    terminalId:
+      type: string
+      title: terminalId
+      description: Идентификатор кассы (256 символов).
+      minLength: 256
+      maxLength: 256
+      x-examples:
+        example-1: mip9e26ay3z2s0oh
+    cardSession:
+      type: string
+      title: cardSession
+      description: 'Идентификатор сессии, извлеченный ТСП из штрихкода при сканировании карты или с информацией о QR-коде (не более 32 символов, латинские буквы и цифры, либо 6 символов для одномерных штрихкодов).'
+      maxLength: 32
+      x-examples:
+        example-1: 123456
+    availabilityInfoId:
+      type: string
+      title: availabilityInfoId
+      description: Идентификатор для запроса информации о списке доступных провайдеров платежей.
+      x-examples:
+        example-1: ecda679e-f5ab-4250-b622-2a429d714b21
+    transactionId:
+      type: string
+      title: transactionId
+      description: 'Идентификатор транзакции оплаты (GUID, 36 символов).'
+      x-examples:
+        example-1: 9dcc19d0-9c5a-11ea-ab12-0800200c9a66
+      minLength: 36
+      maxLength: 36
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+  parameters:
+    token:
+      name: token
+      in: header
+      required: true
+      schema:
+        type: string
+        example: 'token: SW50ZWwoUikgQ29yZShUTSkgaTUtNzIwMFUgQ1BVIEAgMi41MEdIejtDUFUWO1RpbWk7TU1HNVMwMDAwMDEwNzc5TFAwMzFaOzE2MTcyNzYxNzk2MjA7MTkyLjE2OC4xLjEwMztVU0IgUm9vdCBIdWIgKFVTQiAzLjApI1VTQiBDb21wb3NpdGUgRGV2aWNlI1hpYW9NaSBVU0IgMi4wIFdlYmNhbSNJbnRLbChSKSBXaXJLbGVzcyBCbHVLdG9vdGgoUikjRUxBTiBXQkYgRmluZ2VycHJpbnQgU2Vuc29yI1VTQiBJbnB1dCBEZXZpY2UjSElELWNvbXBsaWFudCBtb3VzZQ==967'
+      description: 'Состоит из значения параметра `cashFingerPrint` и парольной части TOTP. Значение получается от модуля Кошелёк TOTP, развернутого на кассовом сервере ТСП.'
+  requestBodies: {}
+  examples: {}
+  responses:
+    '422':
+      description: 'В случае ошибки обработки запроса будет возвращен HTTP-ответ с кодом 422, содержащий JSON-объект, описывающий возникшую ошибку. В частности, этот объект содержит строковое сообщение с описанием причины ошибки на русском языке. См. [Коды ошибок](https://app.developerhub.io/koshelek/v1.0/pay-api/ref#коды-ошибок).'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+                enum:
+                  - UNKNOWN_SESSION_ID
+                  - UNKNOWN_TRANSACTION_ID
+                  - UNKNOWN_PARTNER_ID
+                  - WRONG_TRANSACTION_STATE_CHANGE
+                  - PAYMENT_TRANSACTION_IS_NOT_PAID
+                  - CANCEL_REFUNDING_BY_BANK
+                  - TRANSACTION_FOR_SESSION_ID_ALREADY_EXISTS
+                  - TRANSACTION_FOR_SESSION_ID_ALREADY_PAYED
+                  - TRANSACTION_IN_PROCESSING
+              details:
+                type: string
+            required:
+              - code
+          examples:
+            '422':
+              value:
+                code: TRANSACTION_IN_PROCESSING
+                details: Транзакция в обработке
+        application/xml:
+          schema:
+            type: object
+            properties: {}
+        multipart/form-data:
+          schema:
+            type: object
+            properties: {}
+      headers: {}
+security: []
