@@ -2,4 +2,4 @@
 
 EN
 
-!!swagger-http https://api.swaggerhub.com/apis/rbheopenamt/mps/2.2.0!!
+!!swagger-http https://raw.githubusercontent.com/andwr/mkdocs-material-fork/main/docs/openapi/pay-api.yaml!!
