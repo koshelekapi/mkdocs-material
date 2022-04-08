@@ -73,4 +73,11 @@ plugins:
         en:
           О проекте: About
           Версионирование: Versioning
-          
+          Локализация: Localization
+          Разметка: Markdown
+          Поиск: Search
+          Обратная связь: Feedback
+          Аналитика: Analytics
+          Кастомизация: Customization
+          Плагины: Plugins
+          Процесс ревью: Process
