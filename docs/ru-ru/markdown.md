@@ -50,11 +50,8 @@ _italic_
 
 > Цитата
 
-!> **Important** notice with `inline code` and additional placeholder text used
-to force the content to wrap and span multiple lines.
+!!! tip Use the language switcher in the header to switch between the localized versions of this demo website. This switcher is part of mkdocs-material >= 7.1.0 and is automatically configured by this plugin or can be statically configured from the mkdocs.yml file.
 
-?> **Tip** notice with `inline code` and additional placeholder text used to
-force the content to wrap and span multiple lines.
 
 | Prop | Type | Required | Default | Description |
 | ---- |:----:|:---:|:-------:| :----------:|
