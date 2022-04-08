@@ -76,12 +76,10 @@ force the content to wrap and span multiple lines.
 
 
 === "Tab-01"
-
 !> **Important** notice with `inline code` and additional placeholder text used
 to force the content to wrap and span multiple lines.
 
 === "Tab-02"
-
 ```
 notice with `inline code` and additional placeholder text used
 to force the content to wrap and span multiple lines.
