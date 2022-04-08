@@ -8,4 +8,4 @@
 
 Пример Pay API:
 
-!!swagger pay-api.yaml!!
+!!swagger pay-api.json!!
