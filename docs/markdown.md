@@ -86,23 +86,25 @@ force the content to wrap and span multiple lines.
     - list item b
 
 
+---
+
 === "Tab-01"
-!> **Important** notice with `inline code` and additional placeholder text used
-to force the content to wrap and span multiple lines.
+    !> **Important** notice with `inline code` and additional placeholder text used
+    to force the content to wrap and span multiple lines.
 
 === "Tab-02"
-```
-notice with `inline code` and additional placeholder text used
-to force the content to wrap and span multiple lines.
-```
+    ```
+    notice with `inline code` and additional placeholder text used
+    to force the content to wrap and span multiple lines.
+    ```
 
-| Prop | Type | Required | Default | Description |
-| ---- |:----:|:---:|:-------:| :----------:|
-| type | `String` |`N`| `errorPage`|`errorPage`, `noNetwork`, `noGoods`, `errorLocation`|
-| show | `Boolean` |`N`| `true` | whether to show |
-| padding-top | `Number` |`N`| `240` | padding top from screen |
-| custom-set | `Object` |`N`| `{}` |custom config [type.js](https://github.com/apache/incubator-weex-ui/blob/master/packages/wxc-result/type.js)|
-| wrap-style | `Object` | `N`|`{}` | custom wrap style|
+    | Prop | Type | Required | Default | Description |
+    | ---- |:----:|:---:|:-------:| :----------:|
+    | type | `String` |`N`| `errorPage`|`errorPage`, `noNetwork`, `noGoods`, `errorLocation`|
+    | show | `Boolean` |`N`| `true` | whether to show |
+    | padding-top | `Number` |`N`| `240` | padding top from screen |
+    | custom-set | `Object` |`N`| `{}` |custom config [type.js](https://github.com/apache/incubator-weex-ui/blob/master/packages/wxc-result/type.js)|
+    | wrap-style | `Object` | `N`|`{}` | custom wrap style|
 
 ![jpg](assets/jpg.jpg)
 
