@@ -2,6 +2,6 @@
 
 EN
 
-![jpg](assets/jpg.en.jpg)
+![jpg](assets/jpg.jpg)
 
-![gif](assets/gif.en.gif)
+![gif](assets/gif.gif)
