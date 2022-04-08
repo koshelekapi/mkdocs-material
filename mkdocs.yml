@@ -57,3 +57,22 @@ plugins:
       input_folder: 'src'
       input_extensions: 'puml' # comma separated list of extensions to parse, by default every file is parsed
   - render_swagger
+  - i18n:
+      default_language: !ENV [DEFAULT_LANGUAGE, "ru"]
+      default_language_only: !ENV [DEFAULT_LANGUAGE_ONLY, false]
+      languages:
+        default:
+          name: Default (ru)
+          build: true
+        en:
+          name: Русский
+          build: true
+          site_name: "MkDocs Material (Русскоязычная версия)"
+        fr:
+          name: English
+          build: true
+          site_name: "MkDocs Material (English Version)"
+      nav_translations:
+        fr:
+          Topic1: Sujet1
+          Topic2: Sujet2
