@@ -1,6 +1,6 @@
 # Разметка
 
-> Источник: https://docsify.js.org/#/markdown?id=markdown-configuration
+> Источник: [https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/](https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/)
 
 Поддерживается базовая разметка Markdown, которую можно сконфигурировать или расширить подключением [плагинов](plugins.md) (например, если нужны вкладки).
 
@@ -38,11 +38,11 @@ _italic_
 2. Two
 3. Three
 
-- bullet level 1
-   - bullet level 2
-      - bullet level 3
-         - bullet level 4
-            - etc
+* bullet level 1
+   * bullet level 2
+      * bullet level 3
+         * bullet level 4
+            * etc
 
 
 > Цитата
@@ -97,6 +97,6 @@ to force the content to wrap and span multiple lines.
 | wrap-style | `Object` | `N`|`{}` | custom wrap style|
 <!-- tabs:end -->
 
-![jpg](/assets/jpg.jpg)
+![jpg](assets/jpg.jpg)
 
-![gif](/assets/gif.gif)
+![gif](assets/gif.gif)
