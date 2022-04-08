@@ -8,4 +8,4 @@
 
 Пример Pay API:
 
-!!swagger pay-api.yaml!!
+!!swagger-http https://github.com/andwr/mkdocs-material-fork/blob/main/docs/openapi/pay-api.yaml!!

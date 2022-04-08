@@ -2,6 +2,4 @@
 
 EN
 
-!!swagger pay-api.yaml!!
-
-![jpg](assets/jpg.jpg)
+!!swagger-http https://github.com/andwr/mkdocs-material-fork/blob/main/docs/openapi/pay-api.yaml!!
