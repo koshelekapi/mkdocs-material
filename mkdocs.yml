@@ -69,7 +69,7 @@ plugins:
           name: English
           build: true
           site_name: "MkDocs Material (EN)"
-#      nav_translations:
-#        fr:
-#          Topic1: Sujet1
-#          Topic2: Sujet2
+      nav_translations:
+        en:
+          О проекте: About
+          Версионирование: Versioning
