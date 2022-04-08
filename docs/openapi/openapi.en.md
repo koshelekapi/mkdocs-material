@@ -2,4 +2,4 @@
 
 EN
 
-!!swagger-http https://github.com/andwr/mkdocs-material-fork/blob/main/docs/openapi/pay-api.en.yaml!!
+!!swagger-http https://raw.githubusercontent.com/andwr/mkdocs-material-fork/main/docs/openapi/pay-api.yaml!!
