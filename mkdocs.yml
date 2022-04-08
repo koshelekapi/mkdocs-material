@@ -38,6 +38,9 @@ extra:
     - name: Русский
     - link: /ru/
     - lang: ru
+markdown_extensions:
+  - pymdownx.tasklist:
+      custom_checkbox: false
 plugins:
   - search
   - build_plantuml:

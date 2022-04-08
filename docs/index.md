@@ -15,23 +15,23 @@ MkDocs — это генератор статических сайтов на б
 * Arduino — [Arduino CLI](https://arduino.github.io/arduino-cli/0.21/)
 * CentOS — [CentOS Infra Docs](https://docs.infra.centos.org/)
 * Intel - [Open Active Management Technology Cloud Toolkit](https://open-amt-cloud-toolkit.github.io/docs/2.2/)
-* Bloomberg - [Selekt](https://bloomberg.github.io/selekt/).
+* Bloomberg - [Selekt](https://bloomberg.github.io/selekt/)
 
 ## Репозитории
 
 Upstream:
 
-* https://github.com/koshelekapi/mkdocs-material
-* https://koshelekapi.github.io/mkdocs-material
+* [https://github.com/koshelekapi/mkdocs-material](https://github.com/koshelekapi/mkdocs-material)
+* [https://koshelekapi.github.io/mkdocs-material](https://koshelekapi.github.io/mkdocs-material)
 
 Origin:
 
-* https://github.com/andwr/mkdocs-material
-* https://andwr.github.io/mkdocs-material
+* [https://koshelekapi.github.io/mkdocs-material](https://koshelekapi.github.io/mkdocs-material)
+* [https://andwr.github.io/mkdocs-material](https://andwr.github.io/mkdocs-material)
 
 ## Структура проекта
 
-    mkdocs.yml    # The configuration file.
+    mkdocs.yml    # Файл конфигурации.
     docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+        index.md  # Домашняя страница.
+        ...       # Другие страницы в разметке MD.
