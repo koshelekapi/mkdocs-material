@@ -36,10 +36,10 @@ extra:
   homepage: https://koshelekapi.github.io/mkdocs-material/
   alternate:
     - name: English
-    - link: docs/en-us/
+    - link: /en/
     - lang: en
     - name: Русский
-    - link: docs/ru-ru
+    - link: /ru/
     - lang: ru
 markdown_extensions:
   - pymdownx.tasklist: # https://squidfunk.github.io/mkdocs-material/reference/lists/
