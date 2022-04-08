@@ -14,4 +14,5 @@ jobs:
           python-version: 3.x
       - run: pip install mkdocs-material
       - run: pip3 install mkdocs-build-plantuml-plugin
+      - run: pip install mkdocs-render-swagger-plugin
       - run: mkdocs gh-deploy --force
