@@ -1,4 +1,4 @@
-# MkDocs
+# MkDocs Material
 
 MkDocs — это генератор статических сайтов на базе [Python](https://www.python.org/). Проект существует с 2014 г.
 

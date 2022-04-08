@@ -1,4 +1,4 @@
-site_name: Project name
+site_name: MkDocs Material
 theme:
   name: material
   language: ru
@@ -16,7 +16,7 @@ theme:
           icon: material/toggle-switch
           name: Switch to light mode
 nav:
-  - MkDocs Material: index.md
+  - О проекте: index.md
   - PlantUML: plantuml.md
   - OpenAPI: openapi/openapi.md
   - Версионирование: versioning.md
