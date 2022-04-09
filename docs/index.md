@@ -22,7 +22,7 @@ MkDocs Material — начинаясь как тема оформления дл
 * Intel - [Open Active Management Technology Cloud Toolkit](https://open-amt-cloud-toolkit.github.io/docs/2.2/)
 * Bloomberg - [Selekt](https://bloomberg.github.io/selekt/)
 
-## Репозитории
+## Репозитории [repos]
 
 Upstream:
 
