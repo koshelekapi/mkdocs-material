@@ -52,11 +52,7 @@ _italic_
 
 ---
 
-!!! note
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
-    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
-    massa, nec semper lorem quam in massa.
+!!! tip Use the language switcher in the header to switch between the localized versions of this demo website. This switcher is part of mkdocs-material >= 7.1.0 and is automatically configured by this plugin or can be statically configured from the mkdocs.yml file.
 
 ---
 
@@ -82,11 +78,8 @@ _italic_
 ```
 
 === "Tab-01"
-   !!! note
-
-       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
-      nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
-      massa, nec semper lorem quam in massa.
+    notice with `inline code` and additional placeholder text used
+    to force the content to wrap and span multiple lines.
 
 === "Tab-02"
     ```
