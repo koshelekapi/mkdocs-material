@@ -41,8 +41,7 @@ markdown_extensions:
 extra:
   homepage: https://koshelekapi.github.io/mkdocs-material/
 plugins:
-  - search:
-    lang: ru
+  - search
   - render_swagger
   - build_plantuml:
       render: 'server' # or "local" for local rendering
