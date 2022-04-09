@@ -1,20 +1,23 @@
 # Кастомизация
 
-## Базовые настройки
+> Источник: [https://squidfunk.github.io/mkdocs-material/customization/#additional-css](https://squidfunk.github.io/mkdocs-material/customization/#additional-css)
 
-Настройки внешнего вида сайта выполняются на уровне файла CSS.
+Настройка внешнего вида сайта выполняется на уровне файла **extra.css**. Файл необходимо разместить в каталоге **docs**:
 
-Есть несколько готовых вариантов CSS ("тем"), подробности здесь:
+```
+.
+├─ docs/
+│  └─ stylesheets/
+│     └─ extra.css
+└─ mkdocs.yml
+```
 
-https://docsify.js.org/#/themes?id=themes
+Затем необходимо указать на него в файле **mkdocs.yml**:
+
+```
+extra_css:
+  - stylesheets/extra.css
+
+```
 
 Можно добавить переключатель светлой/темной темы.
-
-## Темы-плагины
-
-Можно установить плагин [docsify-themeable](https://jhildenbiddle.github.io/docsify-themeable/#/), который предоставляет возможность подключения тем оформления:
-
-1. Default (соответствует базовой теме docsify)
-2. Simple
-3. Simple Dark
-
