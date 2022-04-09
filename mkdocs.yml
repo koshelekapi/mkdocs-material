@@ -33,11 +33,13 @@ nav:
 extra:
   homepage: https://koshelekapi.github.io/mkdocs-material/
 markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
   - pymdownx.tasklist: # https://squidfunk.github.io/mkdocs-material/reference/lists/
       custom_checkbox: false
   - pymdownx.tabbed: # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#tabbed
       alternate_style: true
-  - markdown.extensions.admonition:
 plugins:
   - search
   - render_swagger
