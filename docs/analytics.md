@@ -13,7 +13,7 @@ extra:
 
 ??? question "How to measure site search usage?"
 
-    Besides page views and events, [site search] can be tracked to better
+    Besides page views and events, site search can be tracked to better
     understand how people use your documentation and what they expect to find.
     In order to enable site search tracking, the following steps are required:
 
