@@ -70,7 +70,7 @@ _italic_
       "cardNumber": "", // номер карты в информационной системе партнера
       "cardState" : "", // состояние карты ("active" / "inactive")
       "barcode": { // штрихкод карты
-         "barcodeNumber": "", // номер штрихкода
+         "barcodeNumber": 1234567890, // номер штрихкода
          "barcodeType": ""    // тип штрихкода ("EAN_8" / "EAN_13" / "CODE_128" / "UPC_A" / "QR_CODE")
     }
   }
