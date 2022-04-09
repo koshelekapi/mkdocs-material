@@ -50,15 +50,12 @@ _italic_
 
 > Цитата
 
----
-
 !!! note
 
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
     nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
     massa, nec semper lorem quam in massa.
 
----
 
 | Prop | Type | Required | Default | Description |
 | ---- |:----:|:---:|:-------:| :----------:|
@@ -84,7 +81,7 @@ _italic_
 === "Tab-01"
    !!! note
 
-       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
       nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
       massa, nec semper lorem quam in massa.
 
