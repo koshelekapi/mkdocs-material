@@ -33,6 +33,8 @@ nav:
   - Плагины: plugins.md
   - Процесс ревью: review.md
 markdown_extensions:
+  - toc:
+      permalink: true
   - attr_list
   - admonition # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/?h=markdown#admonition
   - pymdownx.details
