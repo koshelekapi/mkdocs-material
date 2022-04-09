@@ -1,7 +1,7 @@
 > Источник: [https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-analytics/](https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-analytics/)
 
 Поддерживается интеграция с Google Analytics и Universal Analytics. 
-Для включения этой опции необходимо добавить следующие строки в файл конфигурации **mkdocs.yml**:
+Для включения GA необходимо добавить следующие строки в файл конфигурации **mkdocs.yml**:
 
 ```
 extra:
