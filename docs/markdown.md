@@ -2,7 +2,7 @@
 
 > Источник: [https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/](https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/)
 
-Поддерживается базовая разметка Markdown, которую можно расширить подключением [плагинов](plugins.md) (например, если нужны вкладки). В частности, плагин PyMdown Extensions предлагает следующую коллекцию расширений:
+Поддерживается базовая разметка Markdown, которую можно расширить подключением [плагинов](plugins.md) (например, если нужны вкладки). В частности, плагин Pymdown Extensions предлагает следующую коллекцию расширений:
 
 [https://facelessuser.github.io/pymdown-extensions/#extensions](https://facelessuser.github.io/pymdown-extensions/#extensions)
 
@@ -50,7 +50,24 @@ _italic_
 
 > Цитата
 
-!!! tip Use the language switcher in the header to switch between the localized versions of this demo website. This switcher is part of mkdocs-material >= 7.1.0 and is automatically configured by this plugin or can be statically configured from the mkdocs.yml file.
+!!! note
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+    massa, nec semper lorem quam in massa.
+
+!!! tip
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+    massa, nec semper lorem quam in massa.
+
+!!! warning
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+    massa, nec semper lorem quam in massa.
+
 
 
 | Prop | Type | Required | Default | Description |
@@ -67,7 +84,7 @@ _italic_
       "cardNumber": "", // номер карты в информационной системе партнера
       "cardState" : "", // состояние карты ("active" / "inactive")
       "barcode": { // штрихкод карты
-         "barcodeNumber": "", // номер штрихкода
+         "barcodeNumber": 1234567890, // номер штрихкода
          "barcodeType": ""    // тип штрихкода ("EAN_8" / "EAN_13" / "CODE_128" / "UPC_A" / "QR_CODE")
     }
   }
@@ -75,7 +92,7 @@ _italic_
 ```
 
 === "Tab-01"
-    !> **Important** notice with `inline code` and additional placeholder text used
+    notice with `inline code` and additional placeholder text used
     to force the content to wrap and span multiple lines.
 
 === "Tab-02"
@@ -95,3 +112,4 @@ _italic_
 ![jpg](assets/jpg.jpg)
 
 ![gif](assets/gif.gif)
+
