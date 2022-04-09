@@ -1,4 +1,5 @@
 site_name: MkDocs Material
+repo_url: https://github.com/koshelekapi/mkdocs-material
 theme:
   name: material
   language: ru
