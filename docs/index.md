@@ -1,4 +1,4 @@
-# MkDocs Material { #toc-about }
+# MkDocs Material { #about }
 
 MkDocs — это генератор статических сайтов на базе [Python](https://www.python.org/). Проект существует с 2014 г.
 
@@ -14,7 +14,7 @@ MkDocs Material — начинаясь как тема оформления дл
 
 Документация MkDocs Material: [https://squidfunk.github.io/mkdocs-material/](https://squidfunk.github.io/mkdocs-material/)
 
-## Примеры документации { #toc-examples }
+## Примеры документации { #doc-examples }
 
 * Arduino — [Arduino CLI](https://arduino.github.io/arduino-cli/0.21/)
 * Atlassian — [DC Helm Charts ](https://atlassian.github.io/data-center-helm-charts/)
@@ -22,7 +22,7 @@ MkDocs Material — начинаясь как тема оформления дл
 * Intel - [Open Active Management Technology Cloud Toolkit](https://open-amt-cloud-toolkit.github.io/docs/2.2/)
 * Bloomberg - [Selekt](https://bloomberg.github.io/selekt/)
 
-## Репозитории { #toc-repos }
+## Репозитории { #repos }
 
 Upstream:
 
