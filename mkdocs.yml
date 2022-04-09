@@ -1,4 +1,6 @@
 site_name: MkDocs Material
+repo_url: https://github.com/koshelekapi/mkdocs-material
+repo_name: koshelekapi/mkdocs-material
 theme:
   name: material
   language: ru
@@ -31,6 +33,7 @@ nav:
   - Плагины: plugins.md
   - Процесс ревью: review.md
 markdown_extensions:
+  - attr_list
   - admonition # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/?h=markdown#admonition
   - pymdownx.details
   - pymdownx.superfences
@@ -38,6 +41,9 @@ markdown_extensions:
       custom_checkbox: false
   - pymdownx.tabbed: # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#tabbed
       alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
 extra:
   homepage: https://koshelekapi.github.io/mkdocs-material/
 plugins:
