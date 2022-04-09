@@ -1,8 +1,8 @@
 # Кастомизация
 
-## Базовые настройки
+> Источник: [https://squidfunk.github.io/mkdocs-material/customization/#additional-css](https://squidfunk.github.io/mkdocs-material/customization/#additional-css)
 
-Настройки внешнего вида сайта выполняются на уровне файла **extra.css**. Файл необходимо разместить в каталоге **docs**:
+Настройка внешнего вида сайта выполняется на уровне файла **extra.css**. Файл необходимо разместить в каталоге **docs**:
 
 ```
 .
@@ -12,7 +12,7 @@
 └─ mkdocs.yml
 ```
 
-Затем указать на него в файле **mkdocs.yml**:
+Затем необходимо указать на него в файле **mkdocs.yml**:
 
 ```
 extra_css:
@@ -21,4 +21,3 @@ extra_css:
 ```
 
 Можно добавить переключатель светлой/темной темы.
-
