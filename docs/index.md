@@ -17,6 +17,7 @@ MkDocs Material — начинаясь как тема оформления дл
 ## Примеры документации
 
 * Arduino — [Arduino CLI](https://arduino.github.io/arduino-cli/0.21/)
+* Atlassian — [DC Helm Charts ](https://atlassian.github.io/data-center-helm-charts/)
 * CentOS — [CentOS Infra Docs](https://docs.infra.centos.org/)
 * Intel - [Open Active Management Technology Cloud Toolkit](https://open-amt-cloud-toolkit.github.io/docs/2.2/)
 * Bloomberg - [Selekt](https://bloomberg.github.io/selekt/)
