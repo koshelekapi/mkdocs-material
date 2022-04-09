@@ -54,6 +54,13 @@ _italic_
 
 !!! tip Use the language switcher in the header to switch between the localized versions of this demo website. This switcher is part of mkdocs-material >= 7.1.0 and is automatically configured by this plugin or can be statically configured from the mkdocs.yml file.
 
+??? note
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+    massa, nec semper lorem quam in massa.
+
+
 ---
 
 | Prop | Type | Required | Default | Description |
