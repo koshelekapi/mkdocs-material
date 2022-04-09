@@ -42,9 +42,7 @@ extra:
   homepage: https://koshelekapi.github.io/mkdocs-material/
 plugins:
   - search:
-    lang:
-      - ru
-      - en
+    lang: ru
   - render_swagger
   - build_plantuml:
       render: 'server' # or "local" for local rendering
