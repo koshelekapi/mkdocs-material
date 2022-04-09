@@ -37,6 +37,7 @@ markdown_extensions:
       custom_checkbox: false
   - pymdownx.tabbed: # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/#tabbed
       alternate_style: true
+  - markdown.extensions.admonition:
 plugins:
   - search
   - render_swagger

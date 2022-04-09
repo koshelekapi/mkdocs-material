@@ -2,7 +2,7 @@
 
 > Источник: [https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/](https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/)
 
-Поддерживается базовая разметка Markdown, которую можно расширить подключением [плагинов](plugins.md) (например, если нужны вкладки). В частности, плагин PyMdown Extensions предлагает следующую коллекцию расширений:
+Поддерживается базовая разметка Markdown, которую можно расширить подключением [плагинов](plugins.md) (например, если нужны вкладки). В частности, плагин Pymdown Extensions предлагает следующую коллекцию расширений:
 
 [https://facelessuser.github.io/pymdown-extensions/#extensions](https://facelessuser.github.io/pymdown-extensions/#extensions)
 
