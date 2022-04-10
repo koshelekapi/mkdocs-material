@@ -22,8 +22,11 @@ MkDocs Material — начинаясь как тема оформления дл
 * Intel - [Open Active Management Technology Cloud Toolkit](https://open-amt-cloud-toolkit.github.io/docs/2.2/)
 * Bloomberg - [Selekt](https://bloomberg.github.io/selekt/)
 
-## Репозитории { #repos }
+## Ссылки текущего проекта { #links }
 
+Данный проект по исследованию MkDocs размещен на GitHub и опубликован посредством GitHub Pages.
+
+Ссылки проекта:
 
 |  |Origin|Upstream|
 |--|--|--|
