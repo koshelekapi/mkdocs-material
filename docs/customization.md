@@ -2,7 +2,7 @@
 
 > Источник: [https://squidfunk.github.io/mkdocs-material/customization/#additional-css](https://squidfunk.github.io/mkdocs-material/customization/#additional-css)
 
-Настройка внешнего вида сайта выполняется на уровне файла **extra.css**. Файл необходимо разместить в каталоге **docs**:
+Настройка внешнего вида сайта выполняется на уровне файла **extra.css**. Файл необходимо разместить в каталоге **docs/stylesheets**:
 
 ```
 .
