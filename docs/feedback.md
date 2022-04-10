@@ -15,4 +15,4 @@
 [https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-analytics/?h=helpful#was-this-page-helpful](https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-analytics/?h=helpful#was-this-page-helpful)
 
 ---
-:material-file-document-edit-outline: **Заметили опечатку или есть вопрос? Напишите нам: [doc-review@cardsmobile.ru](mailto:doc-review@cardsmobile.ru)**
+:material-file-document-edit-outline: Заметили опечатку или есть вопрос? Напишите нам: [doc-review@cardsmobile.ru](mailto:doc-review@cardsmobile.ru) { .md-button .md-button--primary }
