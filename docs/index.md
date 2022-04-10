@@ -22,17 +22,19 @@ MkDocs Material — начинаясь как тема оформления дл
 * Intel - [Open Active Management Technology Cloud Toolkit](https://open-amt-cloud-toolkit.github.io/docs/2.2/)
 * Bloomberg - [Selekt](https://bloomberg.github.io/selekt/)
 
-## Репозитории { #repos }
+## Ссылки текущего проекта { #links }
 
-Upstream:
+Данный проект по исследованию MkDocs размещен на GitHub и опубликован посредством GitHub Pages.
 
-* [https://github.com/koshelekapi/mkdocs-material](https://github.com/koshelekapi/mkdocs-material)
-* [https://koshelekapi.github.io/mkdocs-material](https://koshelekapi.github.io/mkdocs-material)
+Ссылки проекта:
 
-Origin:
 
-* [https://koshelekapi.github.io/mkdocs-material](https://koshelekapi.github.io/mkdocs-material)
-* [https://andwr.github.io/mkdocs-material](https://andwr.github.io/mkdocs-material)
+|  |Repository URL|GitHub Pages URL|
+|--|--|--|
+|**Origin**|[https://github.com/andwr/mkdocs-material-fork](https://github.com/andwr/mkdocs-material-fork)|[https://andwr.github.io/mkdocs-material-fork](https://andwr.github.io/mkdocs-material-fork)|
+|**Upstream**|[https://github.com/koshelekapi/mkdocs-material](https://github.com/koshelekapi/mkdocs-material)|[https://koshelekapi.github.io/mkdocs-material](https://koshelekapi.github.io/mkdocs-material)|
+
+
 
 ## Структура проекта
 
