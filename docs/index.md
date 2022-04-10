@@ -30,7 +30,7 @@ MkDocs Material — начинаясь как тема оформления дл
 
 |  |Origin|Upstream|
 |--|--|--|
-|**Repo URL:**|[https://github.com/andwr/mkdocs-material-fork](https://github.com/andwr/mkdocs-material-fork)|[https://github.com/koshelekapi/mkdocs-material](https://github.com/koshelekapi/mkdocs-material)|
+|**Repository URL:**|[https://github.com/andwr/mkdocs-material-fork](https://github.com/andwr/mkdocs-material-fork)|[https://github.com/koshelekapi/mkdocs-material](https://github.com/koshelekapi/mkdocs-material)|
 |**GitHub Pages URL:**|[https://andwr.github.io/mkdocs-material-fork](https://andwr.github.io/mkdocs-material-fork)|[https://koshelekapi.github.io/mkdocs-material](https://koshelekapi.github.io/mkdocs-material)|
 
 ## Структура проекта
