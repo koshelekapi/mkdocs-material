@@ -31,8 +31,8 @@ Upstream:
 
 Origin:
 
-* [https://koshelekapi.github.io/mkdocs-material](https://koshelekapi.github.io/mkdocs-material)
-* [https://andwr.github.io/mkdocs-material](https://andwr.github.io/mkdocs-material)
+* [https://github.com/andwr/mkdocs-material-fork](https://github.com/andwr/mkdocs-material-fork)
+* [https://andwr.github.io/mkdocs-material-fork](https://andwr.github.io/mkdocs-material-fork)
 
 ## Структура проекта
 
