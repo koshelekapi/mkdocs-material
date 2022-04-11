@@ -63,8 +63,9 @@ plugins:
       input_folder: 'src'
       input_extensions: 'puml' # comma separated list of extensions to parse, by default every file is parsed
   - i18n:
-      default_language: !ENV [DEFAULT_LANGUAGE, "ru"]
-      default_language_only: !ENV [DEFAULT_LANGUAGE_ONLY, false]
+      default_language: ru
+      default_language_only: false
+      search_reconfigure: true
       languages:
         ru:
           name: Русский
