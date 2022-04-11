@@ -1,4 +1,11 @@
+---
+hide:
+  - toc
+---
+
 # Кастомизация
+
+## Additional CSS
 
 > Источник: [https://squidfunk.github.io/mkdocs-material/customization/#additional-css](https://squidfunk.github.io/mkdocs-material/customization/#additional-css)
 
@@ -19,5 +26,11 @@ extra_css:
   - stylesheets/extra.css
 
 ```
+## Переключение гаммы { #dark_theme }
 
 Можно добавить переключатель светлой/темной темы (добавлена для примера на этом сайте).
+
+## Отключение панелей навигации { #page_layout }
+
+На каждой странице поддерживается возможность отключения панелей навигации слева и справа. 
+На данной странице для примера отключена панель справа (оглавление страницы).
