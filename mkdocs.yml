@@ -65,7 +65,7 @@ plugins:
   - i18n:
       default_language: ru
       default_language_only: false
-      search_reconfigure: false
+      search_reconfigure: true
       languages:
         ru:
           name: Русский
