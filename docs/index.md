@@ -18,9 +18,9 @@ MkDocs Material — начинаясь как тема оформления дл
 
 * Arduino — [Arduino CLI](https://arduino.github.io/arduino-cli/0.21/)
 * Atlassian — [DC Helm Charts ](https://atlassian.github.io/data-center-helm-charts/)
+* Bloomberg - [Selekt](https://bloomberg.github.io/selekt/)
 * CentOS — [CentOS Infra Docs](https://docs.infra.centos.org/)
 * Intel - [Open Active Management Technology Cloud Toolkit](https://open-amt-cloud-toolkit.github.io/docs/2.2/)
-* Bloomberg - [Selekt](https://bloomberg.github.io/selekt/)
 
 ## Ссылки текущего проекта { #links }
 
