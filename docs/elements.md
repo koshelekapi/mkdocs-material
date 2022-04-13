@@ -11,7 +11,7 @@ hide:
 <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css">
 <elements-api
       apiDescriptionUrl="https://raw.githubusercontent.com/andwr/mkdocs-material-fork/main/docs/openapi/pay-api.yaml"
-      router="hash"
+      router="static"
       layout="stacked"
       hideTryIt="true"
     />
