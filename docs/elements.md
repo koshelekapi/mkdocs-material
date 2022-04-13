@@ -13,4 +13,6 @@ hide:
 <elements-api
       apiDescriptionUrl="https://raw.githubusercontent.com/andwr/mkdocs-material-fork/main/docs/openapi/pay-api.yaml"
       router="hash"
+      layout="stacked"
+      hideTryIt="true"
     />
