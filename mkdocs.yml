@@ -33,11 +33,8 @@ nav:
   - Кастомизация: customization.md
   - Плагины: plugins.md
   - Внесение изменений: review.md
-<<<<<<< HEAD
   - Elements HTML: elements.html
   - Elements MD: elements.md
-=======
->>>>>>> parent of 15057d9... Updated mkdocs.yml
 markdown_extensions:
   - toc:
       permalink: true
