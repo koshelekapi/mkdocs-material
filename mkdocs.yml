@@ -24,7 +24,7 @@ nav:
   - О проекте: index.md
   - PlantUML: plantuml.md
   - OpenAPI: openapi.md
-    OpenAPI Stoplight (HTML): openapi-stoplight.html
+  - OpenAPI Stoplight (HTML): openapi-stoplight.html
   - OpenAPI Stoplight (MD): openapi-stoplight.md
   - Версионирование: versioning.md
   - Локализация: localization.md
