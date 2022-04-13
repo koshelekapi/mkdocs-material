@@ -33,6 +33,7 @@ nav:
   - Кастомизация: customization.md
   - Плагины: plugins.md
   - Внесение изменений: review.md
+  - Elements: elements.html
 markdown_extensions:
   - toc:
       permalink: true
