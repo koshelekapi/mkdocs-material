@@ -26,6 +26,7 @@ nav:
   - OpenAPI: openapi.md
   - OpenAPI Stoplight (HTML): openapi-stoplight.html
   - OpenAPI Stoplight (MD): openapi-stoplight.md
+  - OpenaAPI Redoc (HTML): openapi-redoc.html
   - Версионирование: versioning.md
   - Локализация: localization.md
   - Разметка: markdown.md
