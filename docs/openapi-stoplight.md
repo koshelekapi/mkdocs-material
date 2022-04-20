@@ -21,6 +21,7 @@ hide:
     
     [Stoplight MD Fullwidth + Navigation](openapi-stoplight-fw-nav.md)
 
+[Custom CSS](openapi-stoplight-css.md)
 ---
 
 <script src="https://unpkg.com/@stoplight/elements/web-components.min.js">
