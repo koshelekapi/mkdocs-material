@@ -1,21 +1,22 @@
 ---
 hide:
   - toc
+  - navigation
 ---
 
-# Stoplight MD Base
+# Stoplight MD Wide
 
 Пример встраивания документа Stoplight на страницу MkDocs.
 
 - [x] Скрыт блок оглавления (справа)
-- [ ] Скрыт блок навигации (слева)
+- [x] Скрыт блок навигации (слева)
 - [ ] FW-режим с помощью CSS в статье
 
 !!! example "Другие варианты представления (рекомендуется просмотр на подключенном дисплее):"
 
-    Stoplight MD Base (вы здесь)
+    Stoplight MD Base (openapi-stoplight.md)
     
-    [Stoplight MD Wide](openapi-stoplight-wide.md)
+    Stoplight MD Wide (вы здесь)
     
     [Stoplight MD Fullwidth](openapi-stoplight-fw.md)
     

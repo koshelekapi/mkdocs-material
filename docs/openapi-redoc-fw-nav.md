@@ -20,7 +20,7 @@ hide:
 }
 </style>
 
-# Redoc MD Fullwidth + Navigation
+# Redoc MD Fullwidth with Navigation
 
 Пример встраивания документа Redoc на страницу MkDocs.
 

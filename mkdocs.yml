@@ -26,9 +26,6 @@ nav:
   - OpenAPI Swagger (MD): openapi.md
   - OpenAPI Redoc (HTML): openapi-redoc.html
   - OpenAPI Redoc (MD): openapi-redoc.md
-  - OpenAPI Redoc (MD WIDE): openapi-redoc-wide.md
-  - OpenAPI Redoc (MD FULLWIDTH): openapi-redoc-fw.md
-  - OpenAPI Redoc (MD FW+NAV): openapi-redoc-fw-nav.md
   - OpenAPI Stoplight (HTML): openapi-stoplight.html
   - OpenAPI Stoplight (MD): openapi-stoplight.md
   - Версионирование: versioning.md
