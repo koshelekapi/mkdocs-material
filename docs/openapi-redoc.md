@@ -3,7 +3,7 @@ hide:
   - toc
 ---
 
-# OpenAPI — Redoc
+# OpenAPI — Redoc (MD)
 
 Пример встраивания документа Redoc на страницу MkDocs.
 
@@ -11,7 +11,12 @@ hide:
 - [ ] Скрыт блок навигации (слева)
 - [ ] FW-режим с помощью CSS в статье
 
-[Перейти к следующему представлению](openapi-redoc-wide.md)
+Другие варианты представления:
+
+Redoc MD Base (вы здесь)
+[Redoc MD Wide](openapi-redoc-wide.md)
+[Redoc MD Fullwidth](openapi-redoc-fw.md)
+[Redoc MD Fullwidth + Navigation](openapi-redoc-fw-nav.md)
 
 ---
 
