@@ -3,7 +3,7 @@ hide:
   - toc
 ---
 
-# OpenAPI — Redoc (MD)
+# OpenAPI — Redoc MD Base
 
 Пример встраивания документа Redoc на страницу MkDocs.
 

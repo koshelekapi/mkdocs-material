@@ -28,12 +28,15 @@ hide:
 - [ ] Скрыт блок навигации (слева)
 - [x] FW-режим с помощью CSS в статье
 
-Другие варианты представления:
+!!! example "Другие варианты представления:"
 
-[Redoc MD Base](openapi-redoc.md)
-[Redoc MD Wide](openapi-redoc-wide.md)
-[Redoc MD Fullwidth](openapi-redoc-fw.md)
-Redoc MD Fullwidth + Navigation (вы здесь)
+    [Redoc MD Base](openapi-redoc.md)
+    
+    [Redoc MD Wide](openapi-redoc-wide.md)
+    
+    [Redoc MD Fullwidth](openapi-redoc-fw.md)
+    
+    Redoc MD Fullwidth + Navigation (вы здесь)
 
 ---
 
