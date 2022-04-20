@@ -11,6 +11,10 @@ hide:
 
     Redoc MD Base (вы здесь)
     
+    - [x] Скрыт блок оглавления (справа)
+    - [ ] Скрыт блок навигации (слева)
+    - [ ] FW-режим с помощью CSS в статье
+
     [Redoc MD Wide](openapi-redoc-wide.md)
     
     [Redoc MD Fullwidth](openapi-redoc-fw.md)
