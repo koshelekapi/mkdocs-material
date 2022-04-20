@@ -14,8 +14,11 @@ hide:
 !!! example "Другие варианты представления:"
 
     Redoc MD Base (вы здесь)
+    
     [Redoc MD Wide](openapi-redoc-wide.md)
+    
     [Redoc MD Fullwidth](openapi-redoc-fw.md)
+    
     [Redoc MD Fullwidth + Navigation](openapi-redoc-fw-nav.md)
 
 ---
