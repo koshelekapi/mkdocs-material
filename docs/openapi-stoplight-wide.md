@@ -14,7 +14,7 @@ hide:
 
 !!! example "Другие варианты представления (рекомендуется просмотр на подключенном дисплее):"
 
-    Stoplight MD Base (openapi-stoplight.md)
+    [Stoplight MD Base](openapi-stoplight.md)
     
     Stoplight MD Wide (вы здесь)
     
