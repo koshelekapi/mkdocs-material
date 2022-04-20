@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+         <loc>.</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/"/>
+         
+    </url>
+    <url>
+         <loc>analytics/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/analytics/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/analytics/"/>
+         
+    </url>
+    <url>
+         <loc>customization/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/customization/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/customization/"/>
+         
+    </url>
+    <url>
+         <loc>feedback/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/feedback/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/feedback/"/>
+         
+    </url>
+    <url>
+         <loc>localization/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/localization/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/localization/"/>
+         
+    </url>
+    <url>
+         <loc>markdown/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/markdown/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/markdown/"/>
+         
+    </url>
+    <url>
+         <loc>openapi-redoc-fw-nav/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/openapi-redoc-fw-nav/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/openapi-redoc-fw-nav/"/>
+         
+    </url>
+    <url>
+         <loc>openapi-redoc-fw/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/openapi-redoc-fw/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/openapi-redoc-fw/"/>
+         
+    </url>
+    <url>
+         <loc>openapi-redoc-wide/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/openapi-redoc-wide/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/openapi-redoc-wide/"/>
+         
+    </url>
+    <url>
+         <loc>openapi-redoc/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/openapi-redoc/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/openapi-redoc/"/>
+         
+    </url>
+    <url>
+         <loc>openapi-stoplight-css/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/openapi-stoplight-css/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/openapi-stoplight-css/"/>
+         
+    </url>
+    <url>
+         <loc>openapi-stoplight-fw-nav/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/openapi-stoplight-fw-nav/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/openapi-stoplight-fw-nav/"/>
+         
+    </url>
+    <url>
+         <loc>openapi-stoplight-fw/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/openapi-stoplight-fw/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/openapi-stoplight-fw/"/>
+         
+    </url>
+    <url>
+         <loc>openapi-stoplight-wide/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/openapi-stoplight-wide/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/openapi-stoplight-wide/"/>
+         
+    </url>
+    <url>
+         <loc>openapi-stoplight/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/openapi-stoplight/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/openapi-stoplight/"/>
+         
+    </url>
+    <url>
+         <loc>openapi/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/openapi/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/openapi/"/>
+         
+    </url>
+    <url>
+         <loc>plantuml/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/plantuml/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/plantuml/"/>
+         
+    </url>
+    <url>
+         <loc>plugins/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/plugins/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/plugins/"/>
+         
+    </url>
+    <url>
+         <loc>review/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/review/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/review/"/>
+         
+    </url>
+    <url>
+         <loc>search/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/search/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/search/"/>
+         
+    </url>
+    <url>
+         <loc>versioning/</loc>
+         <lastmod>2022-04-20</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="ru" href="ru/versioning/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="en/versioning/"/>
+         
+    </url>
+</urlset>
