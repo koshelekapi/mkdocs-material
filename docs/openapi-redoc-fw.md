@@ -21,7 +21,7 @@ hide:
 }
 </style>
 
-# OpenAPI — Redoc MD Fullwidth
+# Redoc MD Fullwidth
 
 Пример встраивания документа Redoc на страницу MkDocs.
 

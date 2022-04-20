@@ -4,7 +4,7 @@ hide:
   - navigation
 ---
 
-# OpenAPI — Redoc MD Wide
+# Redoc MD Wide
 
 Пример встраивания документа Redoc на страницу MkDocs.
 
