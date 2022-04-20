@@ -25,7 +25,7 @@ nav:
   - PlantUML: plantuml.md
   - OpenAPI MD (Swagger): openapi.md
   - OpenAPI MD (Redoc): openapi-redoc.md
-  - OpenAPI MD Stoplight): openapi-stoplight.md
+  - OpenAPI MD (Stoplight): openapi-stoplight.md
   - OpenAPI HTML (Redoc): openapi-redoc.html
   - OpenAPI HTML (Stoplight): openapi-stoplight.html
   - Версионирование: versioning.md
