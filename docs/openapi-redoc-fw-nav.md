@@ -33,7 +33,7 @@ hide:
 [Redoc MD Base](openapi-redoc.md)
 [Redoc MD Wide](openapi-redoc-wide.md)
 [Redoc MD Fullwidth](openapi-redoc-fw.md)
-Redoc MD Fullwidth + Navigatio (вы здесь)
+Redoc MD Fullwidth + Navigation (вы здесь)
 
 ---
 
