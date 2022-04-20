@@ -29,6 +29,8 @@ hide:
 - [x] Скрыт блок навигации (слева)
 - [x] FW-режим с помощью CSS в статье
 
+[Перейти к следующему представлению](openapi-redoc-fw-nav.md)
+
 ---
 
 <redoc spec-url='https://raw.githubusercontent.com/andwr/mkdocs-material-fork/main/docs/openapi/pay-api.yaml'></redoc>
