@@ -29,7 +29,7 @@ nav:
   - OpenaAPI Redoc (HTML): openapi-redoc.html
   - OpenAPI Redoc (MD): openapi-redoc.md
   - OpenAPI Redoc (MD-FW): openapi-redoc-fw.md
-  - OpenAPI Redoc (MD-FW + TOC): openapi-redoc-fw-toc.md
+  - OpenAPI Redoc (MD-FW + NAV): openapi-redoc-fw-nav.md
   - Версионирование: versioning.md
   - Локализация: localization.md
   - Разметка: markdown.md
