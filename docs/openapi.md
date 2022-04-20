@@ -1,4 +1,4 @@
-# OpenAPI
+# Swagger
 
 ## mkdocs-render-swagger-plugin
 

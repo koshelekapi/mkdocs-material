@@ -1,28 +1,15 @@
 ---
 hide:
   - toc
-  - navigation
 ---
-<style>
-@media only screen and (min-width: 76.25em) {
-  .md-main__inner {
-    max-width: none;
-  }
-  .md-sidebar--primary {
-    left: 0;
-  }
-  .md-sidebar--secondary {
-    right: 0;
-    margin-left: 0;
-    -webkit-transform: none;
-    transform: none;   
-  }
-}
-</style>
 
 # OpenAPI — Stoplight
 
-Пример встраивания документа Stoplight на страницу MkDocs приведен ниже.
+Пример встраивания документа Stoplight на страницу MkDocs.
+
+[x] Скрыт блок оглавления (справа)
+[ ] Скрыт блок навигации (слева)
+[ ] FW-режим с помощью CSS в статье
 
 ---
 
