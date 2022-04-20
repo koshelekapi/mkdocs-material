@@ -7,11 +7,9 @@ hide:
 
 Пример встраивания документа Stoplight на страницу MkDocs.
 
-- [x] Скрыт блок оглавления (справа)
-- [ ] Скрыт блок навигации (слева)
-- [ ] FW-режим с помощью CSS в статье
 
-!!! example "Другие варианты представления (рекомендуется просмотр на подключенном дисплее):"
+
+!!! example "Варианты представления (рекомендуется просмотр на подключенном дисплее):"
 
     Stoplight MD Base (вы здесь)
     
@@ -21,7 +19,12 @@ hide:
     
     [Stoplight MD Fullwidth + Navigation](openapi-stoplight-fw-nav.md)
 
-[Custom CSS](openapi-stoplight-css.md)
+- [x] Скрыт блок оглавления (справа)
+- [ ] Скрыт блок навигации (слева)
+- [ ] FW-режим с помощью CSS в статье
+
+[(custom css)](openapi-stoplight-css.md)
+
 ---
 
 <script src="https://unpkg.com/@stoplight/elements/web-components.min.js">
