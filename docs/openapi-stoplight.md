@@ -4,11 +4,20 @@ hide:
   - navigation
 ---
 <style>
-  .md-content {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@media only screen and (min-width: 76.25em) {
+  .md-main__inner {
+    max-width: none;
   }
+  .md-sidebar--primary {
+    left: 0;
+  }
+  .md-sidebar--secondary {
+    right: 0;
+    margin-left: 0;
+    -webkit-transform: none;
+    transform: none;   
+  }
+}
 </style>
 
 # OpenAPI — Stoplight
