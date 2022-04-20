@@ -20,15 +20,11 @@ hide:
 }
 </style>
 
-# Redoc MD Fullwidth + Navigation
+# Redoc MD Fullwidth with Navigation
 
 Пример встраивания документа Redoc на страницу MkDocs.
 
-- [x] Скрыт блок оглавления (справа)
-- [ ] Скрыт блок навигации (слева)
-- [x] FW-режим с помощью CSS в статье
-
-!!! example "Другие варианты представления (рекомендуется просмотр на подключенном дисплее):"
+!!! example "Варианты представления (рекомендуется просмотр на подключенном дисплее):"
 
     [Redoc MD Base](openapi-redoc.md)
     
@@ -37,6 +33,10 @@ hide:
     [Redoc MD Fullwidth](openapi-redoc-fw.md)
     
     Redoc MD Fullwidth + Navigation (вы здесь)
+
+- [x] Скрыт блок оглавления (справа)
+- [ ] Скрыт блок навигации (слева)
+- [x] FW-режим с помощью CSS в статье
 
 ---
 
